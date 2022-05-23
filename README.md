@@ -1,2 +1,2 @@
-# HEAP-fitfreaks
+# HEAP-SplitTheBill
 HEAP Project
