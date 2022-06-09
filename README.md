@@ -1,4 +1,3 @@
 # HEAP-SplitTheBill
 HEAP Project
-hello
-sano wrote this
+We aim to create an application which helps to simplify the process of bill-splitting when travelling as a group.
