@@ -22,5 +22,3 @@ VALUES (1, "Swiss Trip", "Jane,Bob,Joey","SGD", "open"),
 
 -- SQL statements
 USE heap15_group;
-SELECT * FROM group;
--- DELETE FROM booking WHERE group_id = 1;

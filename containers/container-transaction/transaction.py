@@ -22,17 +22,21 @@ class Transaction(db.Model):
     transaction_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     group_id = db.Column(db.Integer)
     payer = db.Column(db.String(256))
+    payer_id = db.Column(db.Integer)
     ower = db.Column(db.String(256))
+    ower_id = db.Column(db.Integer)
     Exchange_rate = db.Column(db.FLOAT)
     amount = db.Column(db.FLOAT)
     description = db.Column(db.String(256))
     receipt =  db.Column(db.String(256)) #temporary , it is for holding images
 
-    def __init__(self, transaction_id, group_id, payer,ower,Exchange_rate,amount,description,receipt):
+    def __init__(self, transaction_id, group_id, payer, payer_id, ower, ower_id,Exchange_rate,amount,description,receipt):
         self.transaction_id = transaction_id
         self.group_id = group_id
         self.payer = payer
+        self.payer_id = payer_id
         self.ower = ower
+        self.ower_id = ower_id
         self.Exchange_rate = Exchange_rate
         self.amount = amount
         self.description = description
@@ -40,8 +44,8 @@ class Transaction(db.Model):
         
 
     def json(self):
-        return {"transaction_id": self.transaction_id , "group_id": self.group_id, "payer": self.payer, "ower": self.ower,
-        "Exchange_rate": self.Exchange_rate, "amount": self.amount,"description": self.description,"receipt":self.receipt}
+        return {"transaction_id": self.transaction_id , "group_id": self.group_id, "payer": self.payer, "payer_id": self.payer_id, "ower": self.ower,"ower_id": self.ower_id
+        ,"Exchange_rate": self.Exchange_rate, "amount": self.amount,"description": self.description,"receipt":self.receipt}
 
 
 
