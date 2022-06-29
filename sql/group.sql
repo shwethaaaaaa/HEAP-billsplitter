@@ -14,7 +14,7 @@ CREATE TABLE `group` (
 );
 
 -- import group
-INSERT INTO group (group_id, group_name, group_members, home_currency, group_status)
+INSERT INTO `group` (group_id, group_name, group_members, home_currency, group_status)
 VALUES (1, "Swiss Trip", "Jane,Bob,Joey","SGD", "open"),
 (2,	"UK Trip", "Ron,Mark,Harry","SGD", "open"),
 (3,	"Girls Trip to Bali","Jane,Mary,Joey", "SGD", "open"),
