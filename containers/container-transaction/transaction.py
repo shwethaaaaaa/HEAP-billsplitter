@@ -72,12 +72,14 @@ def get_all_transactions():
 # get_transaction_by_id() - GET request returning a transaction by transaction_id
 @app.route("/transaction/<int:group_id>")
 def get_transaction_by_id(group_id):
-    transaction = Transaction.query.filter_by(group_id=group_id).first()
-    if transaction:
+    transactions = Transaction.query.filter_by(group_id=group_id).all()
+    if transactions:
         return jsonify(
             {
                 "code": 200,
-                "data": transaction.json()
+                "data": {
+                    "transactions": [transaction.json() for transaction in transactions]
+                }
             }
         )
     return jsonify(
@@ -92,23 +94,35 @@ def get_transaction_by_id(group_id):
 @app.route("/transaction", methods=['POST'])
 def create_new_transaction():
     try:
-        transaction_id = request.json.get('transaction_id', None)
-        if (Transaction.query.filter_by(transaction_id=transaction_id).first()):
-            return jsonify(
-                {
-                    "code": 400,
-                    "data": {
-                        "transaction_id": transaction_id
-                    },
-                    "message": "Transaction already exists."
-                }
-            ), 400
 
         transaction_info = request.get_json()
         print(transaction_info)
+        #Complex needs to check , if the payer and ower is in group and check if group id exist 
+        amount= transaction_info["amount"] 
+        exchange_rate = transaction_info["Exchange_rate"]
+        
+        if amount <=0 :
+             return jsonify(
+            {
+                "code": 404,
+                "message":"Invalid amount for transaction"
+            }
+        ), 404
+             
+        if exchange_rate <=0 :
+             return jsonify(
+            {
+                "code": 404,
+                "message":"Invalid exchange rate"
+            }
+        ), 404
+            
+            
         new_transaction = Transaction(Transaction.transaction_id, **transaction_info) # the user will provide everything else except the GroupID
         db.session.add(new_transaction)
         db.session.commit()
+        
+        
     except Exception as e:
         return jsonify(
             {
