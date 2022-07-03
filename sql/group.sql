@@ -18,7 +18,8 @@ INSERT INTO `group` (group_id, group_name, group_members, home_currency, group_s
 VALUES (1, "Swiss Trip", "Jane,Bob,Joey","SGD", "open"),
 (2,	"UK Trip", "Ron,Mark,Harry","SGD", "open"),
 (3,	"Girls Trip to Bali","Jane,Mary,Joey", "SGD", "open"),
-(4,	"23 Japan Trip","Joey,Marcus,Monica", "SGD", "open");
+(4,	"23 Japan Trip","Ron,Monica,Chandler,Krish,Prakash", "SGD", "open"),
+(5,	"Krabi Trip","Joey,Marcus,Monica", "SGD", "open");
 
 -- SQL statements
 USE heap15_group;

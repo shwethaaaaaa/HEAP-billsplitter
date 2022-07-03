@@ -97,26 +97,77 @@ def process_bill(group_id):
 
     # PREPARING INPUT FOR BILLSPLITTING ALGO
     
+    # group_members_string = final_data['group_members']
+    # group_members_list = group_members_string.split(',')
+    # all_transactions_in_grp = final_data['all_transactions']
+
+    # net_amt_dict = {}
+
+    # print (group_members_list)
+
+    # for member in group_members_list:
+    #     net_amt_of_person = 0
+    #     for transaction in all_transactions_in_grp:
+    #         amt = transaction['amount'] * transaction['Exchange_rate']
+    #         if member == transaction['payer']:
+    #             net_amt_of_person += amt
+    #         elif member == transaction['ower']:
+    #             net_amt_of_person -= amt
+    #     net_amt_dict[member] = net_amt_of_person
+    
+    # print('this is dict: ' + str(net_amt_dict))
+
+
     group_members_string = final_data['group_members']
     group_members_list = group_members_string.split(',')
     all_transactions_in_grp = final_data['all_transactions']
 
-    net_amt_dict = {}
+    input_graph = []
+    list_of_ids = []
+    for transaction in all_transactions_in_grp:
+        ower_id = transaction["ower_id"]
+        payer_id = transaction["payer_id"]
+        if (ower_id not in list_of_ids):
+            list_of_ids.append(ower_id)
+        if (payer_id not in list_of_ids):
+            list_of_ids.append(payer_id)
 
-    print (group_members_list)
+    print("list_of_ids: ")
+    print(list_of_ids)
 
-    for member in group_members_list:
-        net_amt_of_person = 0
-        for transaction in all_transactions_in_grp:
-            amt = transaction['amount'] * transaction['Exchange_rate']
-            if member == transaction['payer']:
-                net_amt_of_person += amt
-            elif member == transaction['ower']:
-                net_amt_of_person -= amt
-        net_amt_dict[member] = net_amt_of_person
+    list_length = len(list_of_ids)
+    for i in range(list_length):
+        input_graph += [[0]*list_length]
+
+
+
     
-    print('this is dict: ' + str(net_amt_dict))
+    for transaction in all_transactions_in_grp:
+        ower_id = transaction["ower_id"]
+        payer_id = transaction["payer_id"]
+        
+        ower_id_in_list = list_of_ids.index(ower_id)
+        payer_id_in_list = list_of_ids.index(payer_id)
+
+        input_graph[ower_id_in_list][payer_id_in_list]+=float(transaction["amount"])
+
+    print("this is input_graph: ")
+    print(input_graph)
+
+
+        
+        
+
+
     
+
+    # Example Input
+    # graph[i][j] indicates the amount
+    # that person i needs to pay person j
+    # graph = [ [0, 1000, 2000],
+    #         [0, 0, 5000],
+    #         [0, 0, 0] ]
+
             
 
 
@@ -177,6 +228,7 @@ def process_bill(group_id):
         # If both amounts are 0,
         # then all amounts are settled
         if (amount[mxCredit] == 0 and amount[mxDebit] == 0):
+            # print("No transactions needed!")
             return 0
 
         # Find the minimum of two amounts
@@ -185,8 +237,66 @@ def process_bill(group_id):
         amount[mxDebit] += min
 
         # If minimum is the maximum amount to be
-        print("Person " , mxDebit , " pays " , min
-            , " to " , "Person " , mxCredit)
+        print("Person " , list_of_ids[mxDebit] , " pays " , min
+            , " to " , "Person " , list_of_ids[mxCredit])
+
+        # STEP 4. Use user_id to get user details from user microservice
+        # Invoke USER MICROSERVICE
+
+        # FOR PAYER
+        print('\n\n-----INVOKING USER MICROSERVICE----') 
+
+        user_id_of_payer = list_of_ids[mxDebit]
+        user_id_of_ower =  list_of_ids[mxCredit]
+
+        payer_result = invoke_http(user_URL + str(user_id_of_payer), method="GET") # must retrieve user_id from TRANSACTION MS
+       
+
+        payer_result_code = payer_result['code']
+    
+        if  payer_result_code not in range(200, 300):
+            return {
+                "code" :  payer_result_code,
+                "message": payer_result['message'] + "/n" + " ; Failed to invoke user microservice for PAYER"
+                }
+
+        print('payer_result:', payer_result, '\n') # if success
+
+        payer_phone_no = payer_result['data']['phone_no']
+        payer_name = payer_result['data']['user_name']
+        amt_to_pay = min
+
+        print("this is payer_phone_no: "+ str(payer_phone_no))
+        print("this is payer_name: " + payer_name)
+
+
+        # FOR OWER
+        user_id_of_ower =  list_of_ids[mxCredit]
+        ower_result = invoke_http(user_URL + str(user_id_of_ower), method="GET") # must retrieve user_id from TRANSACTION MS
+        ower_result_code = ower_result['code']
+        if  ower_result_code not in range(200, 300):
+            return {
+                "ower_code" :  ower_result_code,
+                "message": ower_result['message'] + "/n" + " ; Failed to invoke user microservice for OWER"
+                }
+
+        print('ower_result:', ower_result, '\n') # if success
+
+
+        ower_phone_no = ower_result['data']['phone_no']
+        ower_name = ower_result['data']['user_name']
+        
+
+        print("this is ower_phone_no: "+ str(ower_phone_no))
+        print("this is ower_name: " + ower_name)
+        print("this is amt to pay: "+ str(amt_to_pay))
+
+
+
+
+        # STEP 5: CALL TWILIO
+      
+            
 
         # Recur for the amount array. Note that
         # it is guaranteed that the recursion
@@ -214,38 +324,15 @@ def process_bill(group_id):
                 amount[p] += (graph[i][p] - graph[p][i])
 
         minCashFlowRec(amount)
+
         
     # Driver code
 
-    # graph[i][j] indicates the amount
-    # that person i needs to pay person j
-    graph = [ [0, 1000, 2000],
-            [0, 0, 5000],
-            [0, 0, 0] ]
-
-    minCashFlow(graph)
-
-
-  
+    
+    minCashFlow(input_graph)
 
 
 
-    #  STEP 4. Use user_id to get user details from user microservice
-    # Invoke USER MICROSERVICE
-    # print('\n\n-----INVOKING USER MICROSERVICE----') 
-    # user_result = invoke_http(user_result + str(user_id), method="GET") # must retrieve user_id from TRANSACTION MS
-    # user_result_code = user_result['code']
-
-    # if  user_result_code not in range(200, 300):
-    #     return {
-    #         "code" :  user_result_code,
-    #         "message": user_result['message'] + "/n" + " ; Failed to invoke user microservice"
-    #         }
-
-    # print('user_result:', user_result, '\n') # if success
-
-    # final_data['total_price'] = pricing_result['data']['total_price']
-    # final_data['service_desc'] = pricing_result['data']['services']
 
 
     # testing

@@ -16,11 +16,13 @@ CREATE TABLE `user` (
 -- import user
 INSERT INTO user (user_id, user_name, email, password, phone_no)
 VALUES (1, "janedoe15", "janedoe@gmail.com", "password", "12345678"),
-(2, "harry18", "harrypotter@gmail.com", "password", "87654321"),
-(3, "bobdoe16", "bobdoe@gmail.com", "password", "12345678"),
+(2, "mary18", "marypotter@gmail.com", "password", "87654321"),
+(3, "joeydoe16", "joeydoe@gmail.com", "password", "12345678"),
 (4, "ronweasly15", "ron@gmail.com", "password", "12345678"),
 (5, "happy15", "monicafrens@gmail.com", "password", "12345678"),
-(6, "chandler20", "chandlerfrens@gmail.com", "password", "12345678");
+(6, "chandler20", "chandlerfrens@gmail.com", "password", "12345678"),
+(7, "krish20", "krazykrishfrens@gmail.com", "password", "12345678"),
+(8, "prakash20", "prakashfrens@gmail.com", "password", "12345678");
 
 -- SQL statements
 USE heap15_user;
