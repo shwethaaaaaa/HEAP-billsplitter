@@ -46,6 +46,7 @@ class User(db.Model):
 #  get_all_users() - GET request returning all housekeepers #
 #  user_login - Check user login password against db password #
 # get_user_by_email - GET request returning user by email# (keep or remove if we are keeping login function)
+# get_user_by_user_id - GET request returning user by user_id
 #  add_user() - POST request adding a new user given user data #
 
 ################################################
@@ -126,6 +127,27 @@ def get_user_by_email(email):
         }
     ), 404
 
+
+################################################################################################
+@app.route('/get_user_by_user_id/<int:user_id>')
+def get_user_by_user_id(user_id):
+    user = User.query.filter_by(user_id = user_id).first()
+    if user:
+        return jsonify(
+            {
+                "code": 200,
+                "data": user.json()
+            }
+        ), 200
+
+    return jsonify(
+        {
+            "code": 404,
+            "message": "User not found"
+        }
+    ), 404
+
+    
 ################################################################################################
 @app.route("/add_user", methods=['POST']) # add users as given in the POST data# 
 def add_user():

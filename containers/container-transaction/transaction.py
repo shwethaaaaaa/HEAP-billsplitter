@@ -73,7 +73,7 @@ def get_all_transactions():
 ################################################################################################
 
 ################################################################################################
-# get_transaction_by_id() - GET request returning a transaction by transaction_id
+# get_transaction_by_id() - GET request returning a transaction by group_id
 @app.route("/transaction/<int:group_id>")
 def get_transaction_by_id(group_id):
     transactions = Transaction.query.filter_by(group_id=group_id).all()

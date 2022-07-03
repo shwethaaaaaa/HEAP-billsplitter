@@ -1,2 +1,267 @@
-#helloworld
-#byetest
+from tokenize import group
+from flask import Flask, request, jsonify
+from flask_cors import CORS
+import os, sys
+from os import environ
+import requests
+from invokes import invoke_http
+import json
+
+app = Flask(__name__)
+CORS(app)
+
+# user_URL = environ.get('user_URL') or "http://localhost:5009/get_user_by_email/" # hardcoded to user1 now (who is now a HK)
+# pricing_URL =  environ.get('pricing_URL') or f"http://localhost:5005/selected_services_price/" # GET endpoint from pricing, for a {particular service/services}
+# payment_config_URL = environ.get('payment_config_URL') or f"http://localhost:5006/config" # GET for stripe config
+# payment_checkout_URL = environ.get('payment_checkout_URL') or f"http://localhost:5006/create-checkout-session" # POST to create stripe checkout session
+# booking_URL = environ.get('booking_URL') or "http://localhost:5007/booking"
+
+group_URL = environ.get('user_URL') or "http://localhost:5002//group/"
+transaction_URL =  environ.get('transaction_URL') or "http://localhost:5003/transaction/"
+user_URL = environ.get('user_URL') or "http://localhost:5001//get_user_by_user_id/"
+# notify_URL = environ.get('notify_URL') or "http://notfiy:5006/" #incomplete
+
+
+# ~ UPDATE THIS LATER!
+################################################
+#  functions available # 
+################################################
+#  create_booking() - POST request that creates a booking with details given by the complex microservice
+#  process_created_booking() - Helper function that orchestrates the necessary microservices, be it parsing or giving infomation
+#  Invoking order: Group --> Transaction --> Notify
+
+
+################################################
+@app.route("/calculate_bill/<int:group_id>", methods=['GET'])
+def calculate_bill(group_id):
+    try:
+            # booking = request.get_json()
+            print("\nReceived a request to calculate bill in JSON:")
+            result = process_bill(str(group_id))
+
+            return jsonify(result), result["code"]
+
+    except Exception as e:
+            # Unexpected error in code
+            exc_type, exc_obj, exc_tb = sys.exc_info()
+            fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+            ex_str = str(e) + " at " + str(exc_type) + ": " + fname + ": line " + str(exc_tb.tb_lineno)
+            print(ex_str)
+
+            return jsonify({
+                "code": 500,
+                "message": "calculatebill.py internal error: " + ex_str
+            }), 500
+
+################################################################################################
+def process_bill(group_id):
+
+    final_data = {'group_id': group_id}
+  
+
+    # STEP 1. get group details from group MS using group_id
+    # Invoke the GROUP MICROSERVICE
+
+    print('\n-----INVOKING GROUP MICOSERVICE-----')
+    group_result = invoke_http(group_URL + str(group_id), method='GET')
+    group_result_code =  group_result['code']
+
+    if group_result_code not in range(200,300):
+        return {
+                "code" : group_result_code,
+                "message": group_result_code['message'] + " ; Failed to invoke user microservice"
+                }
+
+    print('group_result:', group_result, '\n') # if success
+
+    final_data['group_name']= group_result['data']['group_name']
+    final_data['group_members'] = group_result['data']['group_members']
+    final_data['home_currency'] = group_result['data']['home_currency']
+
+
+    # STEP 2. Get ALL transactions for a group using group_id
+    print('\n\n-----INVOKING TRANSACTION MICROSERVICE-----')
+    transaction_result = invoke_http(transaction_URL + str(group_id), method="GET")
+    transaction_result_code = transaction_result['code']
+
+    if transaction_result_code not in range(200, 300):
+        return {
+            "code" : transaction_result_code,
+            "message": transaction_result['message'] + "/n" + " ; Failed to invoke transaction microservice"
+            }
+
+    print('transaction_result:', transaction_result, '\n') # if success
+
+    final_data['all_transactions'] = transaction_result['data']['transactions']
+
+
+    # PREPARING INPUT FOR BILLSPLITTING ALGO
+    
+    group_members_string = final_data['group_members']
+    group_members_list = group_members_string.split(',')
+    all_transactions_in_grp = final_data['all_transactions']
+
+    net_amt_dict = {}
+
+    print (group_members_list)
+
+    for member in group_members_list:
+        net_amt_of_person = 0
+        for transaction in all_transactions_in_grp:
+            amt = transaction['amount'] * transaction['Exchange_rate']
+            if member == transaction['payer']:
+                net_amt_of_person += amt
+            elif member == transaction['ower']:
+                net_amt_of_person -= amt
+        net_amt_dict[member] = net_amt_of_person
+    
+    print('this is dict: ' + str(net_amt_dict))
+    
+            
+
+
+    
+  
+    # STEP 3. REPLACE WITH ALGO (MS results as input & algo's ouput is )
+    # Python3 program to find maximum
+    # cash flow among a set of persons
+
+    # Number of persons(or vertices in graph)
+    N = 3
+
+    # A utility function that returns
+    # index of minimum value in arr[]
+    def getMin(arr):
+        
+        minInd = 0
+        for i in range(1, N):
+            if (arr[i] < arr[minInd]):
+                minInd = i
+        return minInd
+
+    # A utility function that returns
+    # index of maximum value in arr[]
+    def getMax(arr):
+
+        maxInd = 0
+        for i in range(1, N):
+            if (arr[i] > arr[maxInd]):
+                maxInd = i
+        return maxInd
+
+    # A utility function to
+    # return minimum of 2 values
+    def minOf2(x, y):
+
+        return x if x < y else y
+
+    # amount[p] indicates the net amount to
+    # be credited/debited to/from person 'p'
+    # If amount[p] is positive, then i'th
+    # person will amount[i]
+    # If amount[p] is negative, then i'th
+    # person will give -amount[i]
+    def minCashFlowRec(amount):
+
+        # Find the indexes of minimum
+        # and maximum values in amount[]
+        # amount[mxCredit] indicates the maximum
+        # amount to be given(or credited) to any person.
+        # And amount[mxDebit] indicates the maximum amount
+        # to be taken (or debited) from any person.
+        # So if there is a positive value in amount[],
+        # then there must be a negative value
+        mxCredit = getMax(amount)
+        mxDebit = getMin(amount)
+
+        # If both amounts are 0,
+        # then all amounts are settled
+        if (amount[mxCredit] == 0 and amount[mxDebit] == 0):
+            return 0
+
+        # Find the minimum of two amounts
+        min = minOf2(-amount[mxDebit], amount[mxCredit])
+        amount[mxCredit] -=min
+        amount[mxDebit] += min
+
+        # If minimum is the maximum amount to be
+        print("Person " , mxDebit , " pays " , min
+            , " to " , "Person " , mxCredit)
+
+        # Recur for the amount array. Note that
+        # it is guaranteed that the recursion
+        # would terminate as either amount[mxCredit]
+        # or amount[mxDebit] becomes 0
+        minCashFlowRec(amount)
+
+    # Given a set of persons as graph[] where
+    # graph[i][j] indicates the amount that
+    # person i needs to pay person j, this
+    # function finds and prints the minimum
+    # cash flow to settle all debts.
+    def minCashFlow(graph):
+
+        # Create an array amount[],
+        # initialize all value in it as 0.
+        amount = [0 for i in range(N)]
+
+        # Calculate the net amount to be paid
+        # to person 'p', and stores it in amount[p].
+        # The value of amount[p] can be calculated by
+        # subtracting debts of 'p' from credits of 'p'
+        for p in range(N):
+            for i in range(N):
+                amount[p] += (graph[i][p] - graph[p][i])
+
+        minCashFlowRec(amount)
+        
+    # Driver code
+
+    # graph[i][j] indicates the amount
+    # that person i needs to pay person j
+    graph = [ [0, 1000, 2000],
+            [0, 0, 5000],
+            [0, 0, 0] ]
+
+    minCashFlow(graph)
+
+
+  
+
+
+
+    #  STEP 4. Use user_id to get user details from user microservice
+    # Invoke USER MICROSERVICE
+    # print('\n\n-----INVOKING USER MICROSERVICE----') 
+    # user_result = invoke_http(user_result + str(user_id), method="GET") # must retrieve user_id from TRANSACTION MS
+    # user_result_code = user_result['code']
+
+    # if  user_result_code not in range(200, 300):
+    #     return {
+    #         "code" :  user_result_code,
+    #         "message": user_result['message'] + "/n" + " ; Failed to invoke user microservice"
+    #         }
+
+    # print('user_result:', user_result, '\n') # if success
+
+    # final_data['total_price'] = pricing_result['data']['total_price']
+    # final_data['service_desc'] = pricing_result['data']['services']
+
+
+    # testing
+    return{
+        "code": 201,
+        "data": {
+            "final_data": final_data
+        }
+    }
+
+
+
+
+
+    # STEP 5: LAST STEP: INVOKE NOTIFY MICROSEVICE
+
+if __name__ == "__main__":
+    print("This is flask " + os.path.basename(__file__) + " for calculating a bill...")
+    app.run(host="0.0.0.0", port=5004, debug=True)
