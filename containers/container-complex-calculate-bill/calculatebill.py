@@ -16,9 +16,22 @@ CORS(app)
 # payment_checkout_URL = environ.get('payment_checkout_URL') or f"http://localhost:5006/create-checkout-session" # POST to create stripe checkout session
 # booking_URL = environ.get('booking_URL') or "http://localhost:5007/booking"
 
-group_URL = environ.get('user_URL') or "http://localhost:5002//group/"
+# Download the helper library from https://www.twilio.com/docs/python/install
+from twilio.rest import Client
+# Find your Account SID and Auth Token at twilio.com/console
+# and set the environment variables. See http://twil.io/secure
+
+account_sid = 'SK630abf319b340f61b0bb8954e93ac07d'
+
+auth_token = '5v4nGrH95L5YRhr0YRM54HYtef512Omx'
+
+# account_sid = os.environ[TWILIO_ACCOUNT_SID] 
+# auth_token = os.environ[TWILIO_AUTH_TOKEN] 
+client = Client(account_sid, auth_token)
+
+group_URL = environ.get('user_URL') or " http://localhost:5002/group/"
 transaction_URL =  environ.get('transaction_URL') or "http://localhost:5003/transaction/"
-user_URL = environ.get('user_URL') or "http://localhost:5001//get_user_by_user_id/"
+user_URL = environ.get('user_URL') or "http://localhost:5007/get_user_by_user_id/"
 # notify_URL = environ.get('notify_URL') or "http://notfiy:5006/" #incomplete
 
 
@@ -249,7 +262,7 @@ def process_bill(group_id):
         user_id_of_payer = list_of_ids[mxDebit]
         user_id_of_ower =  list_of_ids[mxCredit]
 
-        payer_result = invoke_http(user_URL + str(user_id_of_payer), method="GET") # must retrieve user_id from TRANSACTION MS
+        payer_result = invoke_http(user_URL + str(user_id_of_payer) , method="GET") # must retrieve user_id from TRANSACTION MS
        
 
         payer_result_code = payer_result['code']
@@ -293,8 +306,13 @@ def process_bill(group_id):
 
 
 
-
         # STEP 5: CALL TWILIO
+       
+        message = client.messages.create (
+                    body = 'Hi ' +  payer_name + ' you have to pay ' + ower_name + ' '+ str(amt_to_pay) ,
+                    from_='+12517322643',
+                    to = ower_phone_no
+                )   
       
             
 
