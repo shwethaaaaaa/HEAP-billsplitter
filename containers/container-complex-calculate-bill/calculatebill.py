@@ -21,15 +21,15 @@ from twilio.rest import Client
 # Find your Account SID and Auth Token at twilio.com/console
 # and set the environment variables. See http://twil.io/secure
 
-account_sid = 'SK630abf319b340f61b0bb8954e93ac07d'
+account_sid = 'ACda2adf16d90077077fbdf70fc8bf766e'
 
-auth_token = '5v4nGrH95L5YRhr0YRM54HYtef512Omx'
+auth_token = 'efec227ffff8078c529508b7bd666340'
 
 # account_sid = os.environ[TWILIO_ACCOUNT_SID] 
 # auth_token = os.environ[TWILIO_AUTH_TOKEN] 
 client = Client(account_sid, auth_token)
 
-group_URL = environ.get('user_URL') or " http://localhost:5002/group/"
+group_URL = environ.get('group_URL') or " http://localhost:5002/group/"
 transaction_URL =  environ.get('transaction_URL') or "http://localhost:5003/transaction/"
 user_URL = environ.get('user_URL') or "http://localhost:5007/get_user_by_user_id/"
 # notify_URL = environ.get('notify_URL') or "http://notfiy:5006/" #incomplete
@@ -308,11 +308,19 @@ def process_bill(group_id):
 
         # STEP 5: CALL TWILIO
        
+       # notify ower
         message = client.messages.create (
-                    body = 'Hi ' +  payer_name + ' you have to pay ' + ower_name + ' '+ str(amt_to_pay) ,
+                    body = 'Hi ' +  ower_name + ' you have to pay ' + payer_name + ' '+ str(amt_to_pay) ,
                     from_='+12517322643',
                     to = ower_phone_no
-                )   
+                )
+
+        # notify reciever
+        message = client.messages.create (
+                    body = 'Hi ' +  ower_name + ' will pay you this amount: ' + str(amt_to_pay),
+                    from_='+12517322643',
+                    to = payer_phone_no
+                )      
       
             
 

@@ -20,7 +20,7 @@ VALUES (1, "janedoe15", "janedoe@gmail.com", "password", "12345678"),
 (3, "joeydoe16", "joeydoe@gmail.com", "password", "12345678"),
 (4, "ronweasly15", "ron@gmail.com", "password", "+6594576312"),
 (5, "happy15", "monicafrens@gmail.com", "password", "+6581614989"),
-(6, "chandler20", "chandlerfrens@gmail.com", "password", "+6586613663"),
+(6, "chandler20", "chandlerfrens@gmail.com", "password", "+6586613363"),
 (7, "krish20", "krazykrishfrens@gmail.com", "password", "12345678"),
 (8, "prakash20", "prakashfrens@gmail.com", "password", "12345678");
 
