@@ -42,7 +42,7 @@ class Group(db.Model):
 ################################################
 #  functions available #
 ################################################
-# get_all_groups() - GET request returning all groups 
+# get_all_groups() - GET request returning all groups  - working!
 # get_group_by_id() - GET request returning a group by group_id # (Notee: we may need a diff function to get all open & close groups separately)
 # create_new_group() - POST request creating a new group
 # update_home_currency() - PUT request updating a group's home currencyD #
@@ -92,24 +92,21 @@ def get_group_by_id(group_id):
 
 ################################################################################################
 # create_new_group() - POST request creating a new group
+
+# for testing
+#  {
+#     "group_name": "Titans", 
+#     "group_members": "Sara, Timothy, Krish",
+#     "home_currency": "SG"
+# }
+
+
 @app.route("/group", methods=['POST'])
 def create_new_group():
     try:
-        group_id = request.json.get('group_id', None)
-        if (Group.query.filter_by(group_id=group_id).first()):
-            return jsonify(
-                {
-                    "code": 400,
-                    "data": {
-                        "group_id": group_id
-                    },
-                    "message": "Group already exists."
-                }
-            ), 400
-
         group_info = request.get_json()
         print(group_info)
-        new_group = Group(Group.booking_id, group_status = "open", **group_info) # the user will provide everything else except the GroupID
+        new_group = Group(Group.group_id, group_status = "open", **group_info) # the user will provide everything else except the GroupID
         db.session.add(new_group)
         db.session.commit()
     except Exception as e:
@@ -160,24 +157,23 @@ def create_new_group():
 def update_home_currency(group_id):
     try:
         group = Group.query.filter_by(group_id=group_id).first()
-        if not group:
-            return jsonify(
-                {
-                    "code": 404,
-                    "data": {
-                        "booking_id": group_id
-                    },
-                    "message": "Group not found."
-                }
-            ), 404
-
-        # update homecurrency
         data = request.get_json()
         print(data)
-        if data and data['home_currency']:
+        if data and ('home_currency' in data):
             setattr(group, 'home_currency', data['home_currency'])
+            print(data['home_currency'])
 
             db.session.commit()
+
+
+            return jsonify(
+                {
+                    "code": 200,
+                    "data": group.json(),
+                    "message": "Home Currency has been sucessfully updated!"
+                }
+            ), 200
+            
         else:
             return jsonify(
                 {
@@ -186,13 +182,6 @@ def update_home_currency(group_id):
                 }
             ), 400
 
-        return jsonify(
-            {
-                "code": 200,
-                "data": group,
-                "message": "Home Currency has been sucessfully updated!"
-            }
-        ), 200
 
     except Exception as e:
         return jsonify(
