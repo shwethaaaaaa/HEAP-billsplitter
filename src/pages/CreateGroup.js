@@ -1,20 +1,17 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
-import ImageList from '@mui/material/ImageList';
-import ImageListItem from '@mui/material/ImageListItem';
-import Stack from '@mui/material/Stack';
+// import Box from '@mui/material/Box';
+// import ImageList from '@mui/material/ImageList';
+// import ImageListItem from '@mui/material/ImageListItem';
+// import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
 
 import MenuItem from '@mui/material/MenuItem';
 
 
 
-// export default function ExistingGroupsDisplay(){
-//     return(
-//         <>
-//         </>
-//     );
-// }
+
 
 export default function AddingNewGroup(){
     const currencies = [
@@ -35,11 +32,11 @@ export default function AddingNewGroup(){
           label: '¥',
         },
       ];
-    const [value, setValue] = React.useState(new Date('2014-08-18T21:11:54'));
+    // const [value, setValue] = React.useState(new Date('2014-08-18T21:11:54'));
 
-    const handleChange1 = (newValue) => {
-        setValue(newValue);
-    };
+    // const handleChange1 = (newValue) => {
+    //     setValue(newValue);
+    // };
 
     const [currency, setCurrency] = React.useState('EUR');
   
@@ -48,25 +45,43 @@ export default function AddingNewGroup(){
     };
     return(
         <>
-            <TextField id="outlined-basic" label="Group Name" variant="outlined" />
-            <TextField id="outlined-basic" label="Group Image" variant="outlined" />
-            <TextField id="outlined-basic" label="Paid By" variant="outlined" />
-            <input type='file' variant='outlined'></input>
+            <Container>
+                <Row>
+                    <TextField id="outlined-basic" label="Group Name" variant="outlined" />
+                </Row>
+                <br/>
+                <Row>
+
+                    <TextField id="outlined-basic" label="Group Image" variant="outlined" />
+                </Row>
+                <br/>
+                <Row>
+                    <TextField id="outlined-basic" label="Paid By" variant="outlined" />
+                    <input type='file' variant='outlined'></input>
+                </Row>
+                <br/>
+                <Row>         
+                    <TextField
+                        id="outlined-select-currency"
+                        select
+                        label="Select"
+                        value={currency}
+                        onChange={handleChange2}
+                        helperText="Homecurrency"
+                    >
+                        {currencies.map((option) => (
+                        <MenuItem key={option.value} value={option.value}>
+                            {option.label}
+                        </MenuItem>
+                        ))}
+                    </TextField>
+                </Row>
+                <Row>
+                    <button >Create Group</button>
+                </Row>
+                
             
-            <TextField
-                id="outlined-select-currency"
-                select
-                label="Select"
-                value={currency}
-                onChange={handleChange2}
-                helperText="Homecurrency"
-            >
-                {currencies.map((option) => (
-                <MenuItem key={option.value} value={option.value}>
-                    {option.label}
-                </MenuItem>
-                ))}
-            </TextField>
+            </Container>
                     
         </>
 
