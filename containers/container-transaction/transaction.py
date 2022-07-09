@@ -30,7 +30,7 @@ class Transaction(db.Model):
     description = db.Column(db.String(256))
     receipt =  db.Column(db.String(256)) #temporary , it is for holding images
 
-    def __init__(self, transaction_id, group_id, payer, payer_id, ower, ower_id,Exchange_rate,amount,description,receipt):
+    def __init__(self, transaction_id, group_id, payer, payer_id, ower, ower_id,Exchange_rate,amount,description):
         self.transaction_id = transaction_id
         self.group_id = group_id
         self.payer = payer
@@ -40,12 +40,11 @@ class Transaction(db.Model):
         self.Exchange_rate = Exchange_rate
         self.amount = amount
         self.description = description
-        self.receipt = receipt
         
 
     def json(self):
         return {"transaction_id": self.transaction_id , "group_id": self.group_id, "payer": self.payer, "payer_id": self.payer_id, "ower": self.ower,"ower_id": self.ower_id
-        ,"Exchange_rate": self.Exchange_rate, "amount": self.amount,"description": self.description,"receipt":self.receipt}
+        ,"Exchange_rate": self.Exchange_rate, "amount": self.amount,"description": self.description}
 
 
 
