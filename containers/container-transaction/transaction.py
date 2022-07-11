@@ -46,32 +46,10 @@ class Transaction(db.Model):
         ,"Exchange_rate": self.Exchange_rate, "amount": self.amount,"description": self.description}
 
 
-###############################################################################################
-# new combined function
-@app.route("/transaction/<int:user_id>")
-def get_transaction_by_id(user_id):
-    transactions = Transaction.transaction.filteror(Transaction.transaction.payer_id==user_id, Transaction.transaction.ower_id==user_id)
-    if transactions:
-        return jsonify(
-            {
-                "code": 200,
-                "data": {
-                    "transactions": [transaction.json() for transaction in transactions]
-                }
-            }
-        )
-    return jsonify(
-        {
-            "code": 404,
-            "message": "No transactions"
-        }
-    ), 404
-
-
 
 ################################################################################################
 # transaction() - GET request to get transaction be payer_id 
-@app.route("/transaction/<int:payer_id>")
+@app.route("/transaction_to_paid/<int:payer_id>")
 def get_transaction_by_payer_id(payer_id):
     transactions = Transaction.query.filter_by(payer_id=payer_id).all()
     if transactions:
@@ -92,7 +70,7 @@ def get_transaction_by_payer_id(payer_id):
 
 ################################################################################################
 # transaction() - GET request to get transaction be ower_id 
-@app.route("/transaction_to_be_paid/<int:ower_id>")
+@app.route("/transaction_to_be_owed/<int:ower_id>")
 def get_transaction_by_ower_id(ower_id):
     transactions = Transaction.query.filter_by(ower_id=ower_id).all()
     if transactions:
