@@ -28,7 +28,6 @@ class Transaction(db.Model):
     Exchange_rate = db.Column(db.FLOAT)
     amount = db.Column(db.FLOAT)
     description = db.Column(db.String(256))
-    receipt =  db.Column(db.String(256)) #temporary , it is for holding images
 
     def __init__(self, transaction_id, group_id, payer, payer_id, ower, ower_id,Exchange_rate,amount,description):
         self.transaction_id = transaction_id
@@ -73,8 +72,8 @@ def get_transaction_by_id(user_id):
 ################################################################################################
 # transaction() - GET request to get transaction be payer_id 
 @app.route("/transaction/<int:payer_id>")
-def get_transaction_by_id(group_id):
-    transactions = Transaction.query.filter_by(group_id=group_id).all()
+def get_transaction_by_payer_id(payer_id):
+    transactions = Transaction.query.filter_by(payer_id=payer_id).all()
     if transactions:
         return jsonify(
             {
@@ -93,9 +92,9 @@ def get_transaction_by_id(group_id):
 
 ################################################################################################
 # transaction() - GET request to get transaction be ower_id 
-@app.route("/transaction/<int:ower_id>")
-def get_transaction_by_id(group_id):
-    transactions = Transaction.query.filter_by(group_id=group_id).all()
+@app.route("/transaction_to_be_paid/<int:ower_id>")
+def get_transaction_by_ower_id(ower_id):
+    transactions = Transaction.query.filter_by(ower_id=ower_id).all()
     if transactions:
         return jsonify(
             {
@@ -138,7 +137,7 @@ def get_transaction_by_id(group_id):
 ################################################################################################
 # create_new_Transaction() - POST request creating a new transaction
 @app.route("/transaction/<int:group_id>", methods=['POST'])
-def create_new_transaction():
+def create_new_transaction(group_id):
     try:
 
         transaction_info = request.get_json()

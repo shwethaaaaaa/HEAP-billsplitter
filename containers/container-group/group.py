@@ -168,42 +168,42 @@ def create_new_group():
 
 ################################################################################################
 #  USE METHOD AFTER THE PAYMENT IS MADE TO DELETE THE GROUP AFTER PAYMENT IS MADE... (code is just to use as reference later)
-# @app.route("/booking/<int:booking_id>", methods=['DELETE'])
-# def delete_booking(booking_id):
-#     booking = Booking.query.filter_by(booking_id=booking_id).first()
-#     if booking:
-#         db.session.delete(booking)
-#         db.session.commit()
-#         return jsonify(
-#             {
-#                 "code": 200,
-#                 "data": {
-#                     "booking_id": booking_id
-#                 }
-#             }
-#         )
-#     return jsonify(
-#         {
-#             "code": 404,
-#             "data": {
-#                 "booking_id": booking_id
-#             },
-#             "message": "Booking not found."
-#         }
-#     ), 404
+@app.route("/group/<int:group_id>", methods=['DELETE'])
+def delete_group(group_id):
+    group = Group.query.filter_by(group_id=group_id).first()
+    if group:
+        db.session.delete(group)
+        db.session.commit()
+        return jsonify(
+            {
+                "code": 200,
+                "data": {
+                    "group_id": group_id
+                }
+            }
+        )
+    return jsonify(
+        {
+            "code": 404,
+            "data": {
+                "group_id": group_id
+            },
+            "message": "Group not found."
+        }
+    ), 404
 
 
 ################################################################################################
-# update_home_currency() - PUT request updating a group's home currencyD #
-@app.route("/update_home_currency/<int:group_id>", methods=['PUT'])
-def update_home_currency(group_id):
+# update_group_status- PUT request updating a group's status #
+@app.route("/update_group_status/<int:group_id>", methods=['PUT'])
+def update_group_status(group_id):
     try:
         group = Group.query.filter_by(group_id=group_id).first()
         data = request.get_json()
         print(data)
-        if data and ('home_currency' in data):
-            setattr(group, 'home_currency', data['home_currency'])
-            print(data['home_currency'])
+        if data and ('' in data):
+            setattr(group, 'group_status ', data['group_status'])
+            print(data['group_status'])
 
             db.session.commit()
 
@@ -212,7 +212,7 @@ def update_home_currency(group_id):
                 {
                     "code": 200,
                     "data": group.json(),
-                    "message": "Home Currency has been sucessfully updated!"
+                    "message": "Group status has been sucessfully updated!"
                 }
             ), 200
             
@@ -220,7 +220,7 @@ def update_home_currency(group_id):
             return jsonify(
                 {
                     "code": 400,
-                    "message": "You are missing the home currency value, please enter something"
+                    "message": "You are missing the group status, please enter something"
                 }
             ), 400
 
