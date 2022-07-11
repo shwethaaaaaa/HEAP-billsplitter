@@ -49,26 +49,47 @@ class Transaction(db.Model):
 
 
 ################################################################################################
-# get_all_transactions() - GET request returning all transactions 
-@app.route('/get_all_transactions')
-def get_all_transactions():
-    transactionslist = Transaction.query.all()
-    if len(transactionslist):
+# transaction() - GET request to get transaction be payer_id 
+@app.route("/transaction/<int:payer_id>")
+def get_transaction_by_id(group_id):
+    transactions = Transaction.query.filter_by(group_id=group_id).all()
+    if transactions:
         return jsonify(
             {
                 "code": 200,
                 "data": {
-                    "transactions": [transaction.json() for transaction in transactionslist]
+                    "transactions": [transaction.json() for transaction in transactions]
                 }
             }
         )
     return jsonify(
         {
             "code": 404,
-            "message": "There are no transactions."
+            "message": "No transactions"
         }
     ), 404
 
+################################################################################################
+# transaction() - GET request to get transaction be ower_id 
+@app.route("/transaction/<int:ower_id>")
+def get_transaction_by_id(group_id):
+    transactions = Transaction.query.filter_by(group_id=group_id).all()
+    if transactions:
+        return jsonify(
+            {
+                "code": 200,
+                "data": {
+                    "transactions": [transaction.json() for transaction in transactions]
+                }
+            }
+        )
+    return jsonify(
+        {
+            "code": 404,
+            "message": "No transactions"
+        }
+    ), 404
+    
 ################################################################################################
 
 ################################################################################################
@@ -94,7 +115,7 @@ def get_transaction_by_id(group_id):
 
 ################################################################################################
 # create_new_Transaction() - POST request creating a new transaction
-@app.route("/transaction", methods=['POST'])
+@app.route("/transaction/<int:group_id>", methods=['POST'])
 def create_new_transaction():
     try:
 
