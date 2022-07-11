@@ -21,22 +21,45 @@ class Group(db.Model):
     __tablename__ = 'group'
 
     group_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    owner_id = db.Column(db.Integer)
     group_name = db.Column(db.String(256))
     group_members = db.Column(db.String(256))
+    user_ids = db.Column(db.String(256))
     home_currency = db.Column(db.String(256))
     group_status = db.Column(db.String(256))
 
-    def __init__(self, group_id, group_name, group_members, home_currency, group_status):
+    def __init__(self, group_id, owner_id, group_name, group_members, user_ids, home_currency, group_status):
         self.group_id = group_id
+        self.owner_id = owner_id
         self.group_name = group_name
         self.group_members = group_members
+        self.user_ids= user_ids
         self.home_currency = home_currency
         self.group_status = group_status
         
 
     def json(self):
-        return {"group_id": self.group_id, "group_name": self.group_name, "group_members": self.group_members,
+        return {"group_id": self.group_id, "owner_id": self.owner_id, "group_name": self.group_name, "group_members": self.group_members, "user_ids": self.user_ids,
         "home_currency": self.home_currency, "group_status": self.group_status}
+
+
+
+
+# class GroupMembers(db.Model):
+#     __tablename__ = 'group_members'
+
+#     group_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+#     user_id = db.Column(db.Integer)
+   
+
+#     def __init__(self, group_id, user_id):
+#         self.group_id = group_id
+#         self.user_id = user_id
+        
+
+#     def json(self):
+#         return {"group_id": self.group_id, "user_id": self.user_id}
+
 
 
 ################################################
@@ -68,6 +91,25 @@ def get_all_groups():
             "message": "There are no groups."
         }
     ), 404
+
+################################################################################################
+@app.route("/group/<int:_id>")
+def get_group_by_id(group_id):
+    group = Group.query.filter_by(group_id=group_id).first()
+    if group:
+        return jsonify(
+            {
+                "code": 200,
+                "data": group.json()
+            }
+        )
+    return jsonify(
+        {
+            "code": 404,
+            "message": "Group not found."
+        }
+    ), 404
+
 
 ################################################################################################
 
