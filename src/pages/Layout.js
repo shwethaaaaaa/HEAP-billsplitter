@@ -14,7 +14,7 @@ const Layout = () => {
         
         <Link to="/">My Transactions&nbsp;&nbsp;</Link>
         
-        <Link to="/Profile">My Profile&nbsp;</Link>
+        <Link to="/Profile">My Groups&nbsp;</Link>
         
       </nav>
 

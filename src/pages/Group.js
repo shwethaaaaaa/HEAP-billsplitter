@@ -43,37 +43,48 @@ export default function TransactionTable() {
     //     createData('Gingerbread', 356, 16.0, 49, 3.9),
     //   ];
 
-    const rows = [];
+    const rows = []; // to be called form transaction MS
+
+    const groupName = "Trip XX"  // to be rerieved from MS
+    const duration = "12/03/23 - 20/03/23"
+
+
       
     return(
         <>
+        
+          <p>{groupName}</p>
+          <p>{duration}</p>
+          <p>Transaction History</p>
+
+
             <TableContainer component={Paper}>
-                <Table sx={{ minWidth: 700 }} aria-label="customized table">
+                <Table className ='mr-3' sx={{  }} aria-label="customized table">
                     <TableHead>
-                    <TableRow>
-                        <StyledTableCell>Payer</StyledTableCell>
-                        <StyledTableCell align="right">Ower</StyledTableCell>
-                        <StyledTableCell align="right">Exchange Rate&nbsp;(g)</StyledTableCell>
-                        <StyledTableCell align="right">Amount&nbsp;(g)</StyledTableCell>
-                        <StyledTableCell align="right">Description&nbsp;(g)</StyledTableCell>
-                        <StyledTableCell align="right">Receipt&nbsp;(g)</StyledTableCell>
+                    <TableRow >
+                        <StyledTableCell align='center'>Payer</StyledTableCell>
+                        <StyledTableCell align='center'>Ower</StyledTableCell>
+                        <StyledTableCell align='center'>Exchange Rate</StyledTableCell>
+                        <StyledTableCell align='center'>Amount</StyledTableCell>
+                        <StyledTableCell align='center'>Description</StyledTableCell>
+                      
                     </TableRow>
                     </TableHead>
                     <TableBody>
-                    {rows.map((row) => (
-                        <StyledTableRow key={row.name}>
-                        <StyledTableCell component="th" scope="row">
-                            {row.name}
-                        </StyledTableCell>
-                        <StyledTableCell align="right">{row.calories}</StyledTableCell>
-                        <StyledTableCell align="right">{row.fat}</StyledTableCell>
-                        <StyledTableCell align="right">{row.carbs}</StyledTableCell>
-                        <StyledTableCell align="right">{row.protein}</StyledTableCell>
-                        </StyledTableRow>
-                    ))}
+                      {rows.map((row) => (
+                          <StyledTableRow key={row.name}>
+                          <StyledTableCell component="th" scope="row">
+                              {row.name}
+                          </StyledTableCell>
+                          <StyledTableCell align="right">{row.calories}</StyledTableCell>
+                          <StyledTableCell align="right">{row.fat}</StyledTableCell>
+                          <StyledTableCell align="right">{row.carbs}</StyledTableCell>
+                          <StyledTableCell align="right">{row.protein}</StyledTableCell>
+                          </StyledTableRow>
+                      ))}
                     </TableBody>
                 </Table>
-                </TableContainer>
+            </TableContainer>
 
         </>
     );

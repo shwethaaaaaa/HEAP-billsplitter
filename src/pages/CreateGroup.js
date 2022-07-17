@@ -10,13 +10,17 @@ import Row from 'react-bootstrap/Row';
 import MenuItem from '@mui/material/MenuItem';
 
 
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
+
+
 
 
 
 export default function AddingNewGroup(){
     const currencies = [
         {
-          value: 'USD',
+          value: 'SGD',
           label: '$',
         },
         {
@@ -38,36 +42,70 @@ export default function AddingNewGroup(){
     //     setValue(newValue);
     // };
 
-    const [currency, setCurrency] = React.useState('EUR');
-  
+    const [currency, setCurrency] = React.useState('SGD');
+   
+   
+    const allUsers = ['Mary', 'poppy']  // need to call user MS
+    const groupMembers = ''
+
+
+   
+    const handleChange1 = (event) => {
+        
+      };
+
     const handleChange2 = (event) => {
-      setCurrency(event.target.value);
-    };
+        setCurrency(event.target.value);
+      };
     return(
         <>
-            <Container>
-                <Row>
-                    <TextField id="outlined-basic" label="Group Name" variant="outlined" />
+            <Container fluid="sm" className='mt-5   '>
+                <Row className = 'mx-4'>
+                    <TextField id="outlined-basic" label="Group Name" variant="outlined"  />
                 </Row>
                 <br/>
-                <Row>
-
-                    <TextField id="outlined-basic" label="Group Image" variant="outlined" />
+                <Row className = 'mx-4'>
+                    <TextField id="outlined-basic" label="Group Admin" variant="outlined"  />
                 </Row>
                 <br/>
-                <Row>
-                    <TextField id="outlined-basic" label="Paid By" variant="outlined" />
-                    <input type='file' variant='outlined'></input>
+                <Row className = 'mx-4'>
+                    <TextField id="outlined-basic" label="Trip Duration" variant="outlined" placeholder ='DD/MM/YY - DD/MM/YY' />
                 </Row>
                 <br/>
-                <Row>         
+                
+                <Row className = 'mx-4'>
+                    <TextField
+                            id="outlined-select-currency"
+                            select
+                            label="Group Members"
+                            value={groupMembers}
+                            onChange={handleChange1}
+                            helperText=""
+                            
+                        >
+                            {allUsers.map((option) => (
+                            <MenuItem key={option.value} value={option.value}>
+                                {option.label}
+                            </MenuItem>
+                            ))}
+                        </TextField>
+                </Row>
+                <br/>
+               
+                <Row className = 'mx-4'>
+                   
+                    <input type='file' variant='outlined' label="Group Image"></input>
+                </Row>
+                <br/>
+                <Row className = 'mx-4'>         
                     <TextField
                         id="outlined-select-currency"
                         select
-                        label="Select"
+                        label="Home Currency"
                         value={currency}
                         onChange={handleChange2}
-                        helperText="Homecurrency"
+                        helperText=""
+                        
                     >
                         {currencies.map((option) => (
                         <MenuItem key={option.value} value={option.value}>
@@ -76,8 +114,9 @@ export default function AddingNewGroup(){
                         ))}
                     </TextField>
                 </Row>
-                <Row>
-                    <button >Create Group</button>
+                <br/>
+                <Row className = 'mx-4'>
+                    <Button variant="contained">Create Group</Button>
                 </Row>
                 
             
