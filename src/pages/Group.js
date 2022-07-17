@@ -7,7 +7,11 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-
+// import { Button } from 'bootstrap';
+import Button from '@mui/material/Button';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 
 export default function TransactionTable() {
@@ -45,20 +49,22 @@ export default function TransactionTable() {
 
     const rows = []; // to be called form transaction MS
 
-    const groupName = "Trip XX"  // to be rerieved from MS
-    const duration = "12/03/23 - 20/03/23"
+    const groupName = "Trip XX"  // to be rerieved from Group MS
+    const duration = "12/03/23 - 20/03/23" // to be rerieved from group MS
 
 
       
     return(
         <>
-        
-          <p>{groupName}</p>
-          <p>{duration}</p>
-          <p>Transaction History</p>
+          <Container className='mt-5 mb-3'>
+            <h2>{groupName}</h2>
+            <h3>{duration}</h3>
+            <br/>
+            <strong >Transaction History</strong>
+          </Container>
 
 
-            <TableContainer component={Paper}>
+            <TableContainer  component={Paper}>
                 <Table className ='mr-3' sx={{  }} aria-label="customized table">
                     <TableHead>
                     <TableRow >
@@ -85,6 +91,16 @@ export default function TransactionTable() {
                     </TableBody>
                 </Table>
             </TableContainer>
+
+            <Row className='mt-5'>
+              <Col>
+                <Button variant="contained">Add Transaction</Button>
+              </Col>
+              <Col>
+                <Button variant="contained">End Trip</Button>
+              </Col>
+
+            </Row>
 
         </>
     );
