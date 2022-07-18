@@ -10,6 +10,7 @@ export default function GroupFinalTransaction(){
     return (
         <>
             <br></br>
+            <br></br>
             <h2>Final (Trip to Swiss :D) Transactions</h2>
             <Table striped bordered hover variant="dark">
             <thead>

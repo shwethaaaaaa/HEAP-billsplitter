@@ -9,12 +9,11 @@ const Layout = () => {
       
         <Navbar.Brand >BillSplitter&nbsp;</Navbar.Brand>
             
-    
-        <Link to="/">Home&nbsp;&nbsp;</Link>
-        
-        <Link to="/">My Transactions&nbsp;&nbsp;</Link>
-        
-        <Link to="/Profile">My Groups&nbsp;</Link>
+      
+        <Link to="/">My Groups&nbsp;</Link>
+
+        <Link to="/MyTransaction">My Transactions&nbsp;&nbsp;</Link>
+      
         
       </nav>
 
