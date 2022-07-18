@@ -12,10 +12,13 @@ import * as React from 'react';
 import Layout from "./pages/Layout.js";
 import CreateGroup from "./pages/CreateGroup";
 import CreateTransaction from "./pages/CreateTransaction";
-import EndTrip from "./pages/EndTrip.js";
 import Home from "./pages/Home";
 import Group from "./pages/Group";
 import Profile from "./pages/Profile";
+import MyTransaction from "./pages/MyTransaction.js";
+import GroupFinalTransaction from "./pages/GroupFinalTransaction.js";
+
+
 
 
 
@@ -26,18 +29,17 @@ function App() {
   return (
     <div className="App">
       <style>{'body { background-color: #f6e8eb; }'}</style>
-         
+    
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Layout />}>
                 <Route index element={<Home />} />
-                <Route path="EndTrip" element={<EndTrip />} />
                 <Route path="Profile" element={<Profile />} />
                 <Route path="CreateGroup" element={<CreateGroup />} />
                 <Route path="CreateTransaction" element={<CreateTransaction />} />
                 <Route path="Group" element={<Group />} /> 
-
-                
+                <Route path = "MyTransaction" element = {<MyTransaction />} />
+                <Route path = "GroupFinalTransaction" element = {<GroupFinalTransaction />} />
             </Route>
             
           </Routes>
