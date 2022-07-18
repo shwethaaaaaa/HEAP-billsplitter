@@ -1,21 +1,33 @@
 import { Outlet, Link } from "react-router-dom";
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import Image from 'react-bootstrap/Image'
 
 const Layout = () => {
   return (
     <>
-      <nav>
-        
+      {
+          <Navbar bg="dark" variant="dark">
+          <Container>
+          <Image
+              src="heapicon.jpg"
+              width="30"
+              height="30"
+              className="d-inline-block align-top"
+              alt="BillSplitter Logo"></Image>
+            <Navbar.Brand href="#home">BillSplitter</Navbar.Brand>
+            <Nav className="me-auto">
+              <Nav.Link href="/">My Groups</Nav.Link>
+              <Nav.Link href="MyTransaction">My Transactions</Nav.Link>
+            </Nav>
+          </Container>
+        </Navbar>
+       
+      }
       
-        <Navbar.Brand >BillSplitter&nbsp;</Navbar.Brand>
-            
       
-        <Link to="/">My Groups&nbsp;</Link>
-
-        <Link to="/MyTransaction">My Transactions&nbsp;&nbsp;</Link>
-      
-        
-      </nav>
+    
 
       <Outlet />
     </>
