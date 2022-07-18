@@ -12,6 +12,7 @@ import Button from '@mui/material/Button';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import { Outlet, Link } from "react-router-dom";
 
 
 export default function TransactionTable() {
@@ -94,10 +95,10 @@ export default function TransactionTable() {
 
             <Row className='mt-5'>
               <Col>
-                <Button variant="contained">Add Transaction</Button>
+                <Link to="/CreateTransaction"><Button variant="contained">Add Transaction</Button></Link>
               </Col>
               <Col>
-                <Button variant="contained">End Trip</Button>
+              <Link to=""><Button variant="contained">End Trip</Button></Link>
               </Col>
 
             </Row>

@@ -26,17 +26,7 @@ function App() {
   return (
     <div className="App">
       <style>{'body { background-color: #f6e8eb; }'}</style>
-          {/* <Navbar></Navbar>
-          <Button variant="contained" color="secondary">Add Group</Button>
-          <TransactionTable></TransactionTable>
-          <hr/>
-          <AddingNewGroup></AddingNewGroup>
-          <hr/>
-          <AddTransaction></AddTransaction>
-          
-        
-        
-          */}
+         
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Layout />}>
@@ -47,7 +37,7 @@ function App() {
                 <Route path="CreateTransaction" element={<CreateTransaction />} />
                 <Route path="Group" element={<Group />} /> 
 
-                {/* <Route path="*" element={<NoPage />} /> */}
+                
             </Route>
             
           </Routes>
