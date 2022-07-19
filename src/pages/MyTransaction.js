@@ -4,76 +4,50 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Table from 'react-bootstrap/Table';
+import useFetch from './useFetch';
+import DebitTable from './DebitTable';
+import CreditTable from './CreditTable';
+
+
+
 
 
 export default function MyTransaction(){
+
+    // const [query, setQuery] = useState('');
+
+    // for DEBIT TABLE (Hardcoded now to user_id 1 = Jane for now!!)
+    const Debit_API_URL = 'http://localhost:5003/transaction_to_paid/1' 
+    const Credit_API_URL = 'http://localhost:5003/transaction_to_be_owed/1'
+    // + 
+    // query +
+    //  "/";
+
+    const {
+        data: DebitData, 
+        isPendingDebit, 
+        errorDebit
+    } = useFetch(Debit_API_URL, "GET");
+
+    const {
+        data: CreditData, 
+        isPendingCredit, 
+        errorCredit
+    } = useFetch(Credit_API_URL, "GET");
+    
     return (
         <>
-        <br></br>
-        <h2>Your Debits</h2>
-        <Table striped bordered hover variant="dark">
-        <thead>
-        <tr>
-            <th>Transaction ID</th>
-            <th>Group</th>
-            <th>Payer</th>
-            <th>Amount</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>1</td>
-            <td>Trip to Swiss :D</td>
-            <td>Mark</td>
-            <td>+10</td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>Trip to Swiss :D</td>
-            <td>Jacob</td>
-            <td>+20</td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>Aussie Vacay!</td>
-            <td>Shwetha</td>
-            <td>+30</td>
-        </tr>
-        </tbody>
-    </Table>
+            <div id="api-display-card">
+                { errorDebit &&  <p>An error occurred while retrieving the data. </p> }
+                { isPendingDebit && <p>An error occurred while retrieving the data. </p> }
+                { DebitData && <DebitTable debitdata={ DebitData } /> }
+            </div>
 
-    <br></br>
-        <h2>Your Credits</h2>
-        <Table striped bordered hover variant="dark">
-        <thead>
-        <tr>
-            <th>Transaction ID</th>
-            <th>Group</th>
-            <th>Recipient</th>
-            <th>Amount</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>1</td>
-            <td>Trip to KL</td>
-            <td>Otto</td>
-            <td>-10</td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>Trip to Bali</td>
-            <td>Thornton</td>
-            <td>-20</td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>Trip to Germany</td>
-            <td>Sanofer</td>
-            <td>-30</td>
-        </tr>
-        </tbody>
-    </Table>
+            <div id="api-display-card">
+                { errorCredit &&  <p>An error occurred while retrieving the data. </p> }
+                { isPendingCredit && <p>An error occurred while retrieving the data. </p> }
+                { CreditData && <CreditTable creditdata={ CreditData } /> }
+            </div>
   </>
 
 
