@@ -12,7 +12,12 @@ import Button from '@mui/material/Button';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Image from 'react-bootstrap/Image'
+import useFetch from './useFetch';
+import CountryImage from './CountryImage';
 import { Outlet, Link } from "react-router-dom";
+
+
 
 
 export default function TransactionTable() {
@@ -53,10 +58,29 @@ export default function TransactionTable() {
     const groupName = "Trip XX"  // to be rerieved from Group MS
     const duration = "12/03/23 - 20/03/23" // to be rerieved from group MS
 
+    const Unsplash_API_URL = 'https://api.unsplash.com/search/photos?client_id=Tnkm6qLI-aFFmxeB_YxL_lZfMwTNqX4W9T7JhYjqHfg&query=Greece&orientation=landscape' 
+    
+    // + 
+    // query +
+    //  "/";
 
+    const {
+        data :unsplashdata, 
+        isPending3, 
+        error3
+    } = useFetch(Unsplash_API_URL, "GET");
       
+ 
+    // const dataList = data.results[0]
+
     return(
         <>
+          <div id="api-display-card">
+                { error3 &&  <p>An error occurred while retrieving the data. </p> }
+                { isPending3 && <p>An error occurred while retrieving the data. </p> }
+                { unsplashdata && <CountryImage unsplashdata={unsplashdata} /> }
+          </div>
+
           <Container className='mt-5 mb-3'>
             <h2>{groupName}</h2>
             <h3>{duration}</h3>
