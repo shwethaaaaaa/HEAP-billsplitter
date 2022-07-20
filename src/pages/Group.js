@@ -8,11 +8,19 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 // import { Button } from 'bootstrap';
-import Button from '@mui/material/Button';
+// import Button from '@mui/material/Button';
+import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Image from 'react-bootstrap/Image'
+import useFetch from './useFetch';
+import CountryImage from './CountryImage';
+import GroupTransactionsTable from './TransactionsbyGroup';
 import { Outlet, Link } from "react-router-dom";
+import { data } from 'autoprefixer';
+
+
 
 
 export default function TransactionTable() {
@@ -53,10 +61,39 @@ export default function TransactionTable() {
     const groupName = "Trip XX"  // to be rerieved from Group MS
     const duration = "12/03/23 - 20/03/23" // to be rerieved from group MS
 
+    const Unsplash_API_URL = 'https://api.unsplash.com/search/photos?client_id=Tnkm6qLI-aFFmxeB_YxL_lZfMwTNqX4W9T7JhYjqHfg&query=Greece&orientation=landscape'
+    const Transaction_API_URL = 'http://localhost:5003/transaction/4' // hardcoded to group 4 now!
 
+    
+    // + 
+    // query +
+    //  "/";
+
+    const {
+        data :unsplashdata, 
+        isPending3, 
+        error3
+    } = useFetch(Unsplash_API_URL, "GET");
+
+    const {
+      data : grouptransactiondata, 
+      isPending4, 
+      error4
+  } = useFetch(Transaction_API_URL, "GET");
+
+  console.log(grouptransactiondata)
       
+ 
+    // const dataList = data.results[0]
+
     return(
         <>
+          <div id="api-display-card">
+                { error3 &&  <p>An error occurred while retrieving the unsplash data. </p> }
+                { isPending3 && <p>An error occurred while retrieving the unsplash data. </p> }
+                { unsplashdata && <CountryImage unsplashdata={unsplashdata} /> }
+          </div>
+
           <Container className='mt-5 mb-3'>
             <h2>{groupName}</h2>
             <h3>{duration}</h3>
@@ -64,44 +101,26 @@ export default function TransactionTable() {
             <strong >Transaction History</strong>
           </Container>
 
+          <div id="api-display-card">
+                { error4 &&  <p>An error occurred while retrieving the transactions data. </p> }
+                { isPending4 && <p>An error occurred while retrieving the transactions data. </p> }
+                { grouptransactiondata && <GroupTransactionsTable grouptransactiondata= { grouptransactiondata } /> }
+          </div>
 
-            <TableContainer  component={Paper}>
-                <Table className ='mr-3' sx={{  }} aria-label="customized table">
-                    <TableHead>
-                    <TableRow >
-                        <StyledTableCell align='center'>Payer</StyledTableCell>
-                        <StyledTableCell align='center'>Ower</StyledTableCell>
-                        <StyledTableCell align='center'>Exchange Rate</StyledTableCell>
-                        <StyledTableCell align='center'>Amount</StyledTableCell>
-                        <StyledTableCell align='center'>Description</StyledTableCell>
-                      
-                    </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      {rows.map((row) => (
-                          <StyledTableRow key={row.name}>
-                          <StyledTableCell component="th" scope="row">
-                              {row.name}
-                          </StyledTableCell>
-                          <StyledTableCell align="right">{row.calories}</StyledTableCell>
-                          <StyledTableCell align="right">{row.fat}</StyledTableCell>
-                          <StyledTableCell align="right">{row.carbs}</StyledTableCell>
-                          <StyledTableCell align="right">{row.protein}</StyledTableCell>
-                          </StyledTableRow>
-                      ))}
-                    </TableBody>
-                </Table>
-            </TableContainer>
 
-            <Row className='mt-5'>
-              <Col>
-                <Link to="/CreateTransaction"><Button variant="contained">Add Transaction</Button></Link>
-              </Col>
-              <Col>
-              <Link to="/GroupFinalTransaction"><Button variant="contained">End Trip</Button></Link>
-              </Col>
+          <div className="mb-2">
+            <Button href = "/AddTransaction" variant="primary" size="lg">
+              Add Transaction
+            </Button>
 
-            </Row>
+            <Button href = "/GroupFinalTransaction" className = "m-4" variant="danger" size="lg">
+              Exit Group
+            </Button>
+          </div>
+
+
+            
+            
 
         </>
     );
