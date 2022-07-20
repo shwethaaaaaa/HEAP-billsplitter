@@ -1,4 +1,4 @@
-import Button from 'react-bootstrap/Button';
+import Button from '@mui/material/Button';
 import Card from 'react-bootstrap/Card';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -21,7 +21,7 @@ export default function Home(){
                             <Card.Text>
                                 21st June 2022 - 21st July 2022
                             </Card.Text>
-                            <Link to="/Group"><Button variant="primary">View Group</Button></Link>
+                            <Button variant="primary"><Link to="/Group">View Group</Link></Button>
                             <Button variant="primary">End Trip</Button>
                         </Card.Body>
                         </Card>
@@ -108,7 +108,9 @@ export default function Home(){
                         
                     </Col>
                 </Row>
+                <Row><Link to="/CreateGroup"><Button>Create New Group</Button></Link></Row>
             </Container>
+
         </>
 
     );
