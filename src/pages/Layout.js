@@ -11,9 +11,10 @@ const Layout = () => {
           <Navbar bg="dark" variant="dark">
           <Container>
           <Image
-              src="heapicon.jpg"
-              width="30"
-              height="30"
+              src={require('./heapicon.jpg')}
+              width="50"
+              height="50"
+              style = {{borderRadius:"30px", marginRight: "20px"}}
               className="d-inline-block align-top"
               alt="BillSplitter Logo"></Image>
             <Navbar.Brand href="#home">BillSplitter</Navbar.Brand>

@@ -98,7 +98,7 @@ export default function TransactionTable() {
                 <Link to="/CreateTransaction"><Button variant="contained">Add Transaction</Button></Link>
               </Col>
               <Col>
-              <Link to=""><Button variant="contained">End Trip</Button></Link>
+              <Link to="/GroupFinalTransaction"><Button variant="contained">End Trip</Button></Link>
               </Col>
 
             </Row>

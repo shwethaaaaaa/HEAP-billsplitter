@@ -21,7 +21,7 @@ export default function DebitTable({ debitdata }){
                     <tr>
                         <th>Transaction ID</th>
                         <th>GroupID</th>
-                        <th>Ower</th>
+                        <th>Payer</th>
                         <th>Amount</th>
                     </tr>
                     </thead>
