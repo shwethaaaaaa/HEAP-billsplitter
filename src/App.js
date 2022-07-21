@@ -17,6 +17,7 @@ import Group from "./pages/Group";
 import Profile from "./pages/Profile";
 import MyTransaction from "./pages/MyTransaction.js";
 import GroupFinalTransaction from "./pages/GroupFinalTransaction.js";
+import CreateGroupForm from './pages/CreateGroupForm';
 
 
 
@@ -28,8 +29,8 @@ import GroupFinalTransaction from "./pages/GroupFinalTransaction.js";
 function App() {
   return (
     <div className="App">
-      <style>{'body { background-color: #f6e8eb; }'}</style>
-    
+      <style>{'body { background-color: #f6e8eb;  background-image: linear-gradient(to bottom right, pink, blue)}'}</style>
+     
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Layout />}>
