@@ -14,15 +14,16 @@ CREATE TABLE `group` (
     `user_ids` VARCHAR(256) NOT NULL,
     `home_currency` VARCHAR(256) NOT NULL,
     `group_status` VARCHAR (256) NOT NULL,
+    `trip_duration` VARCHAR (256) NOT NULL,
     PRIMARY KEY (`group_id`)
 );
 
 
 -- import group
-INSERT INTO `group` (group_id, owner_id, group_name, group_members, user_ids, home_currency, group_status)
-VALUES (1, 7, "Swiss Trip", "Jane,Krish,Joey", "1,7,3", "SGD", "open"),
-(2, 1, "Girls Trip to Bali","Jane,Mary,Joey", "1,2,3", "SGD", "open"),
-(3,5,"23 Japan Trip","Ron,Monica,Chandler,Krish,Prakash", "4,5,6,7,8", "SGD", "open")
+INSERT INTO `group` (group_id, owner_id, group_name, group_members, user_ids, home_currency, group_status, trip_duration)
+VALUES (1, 7, "Swiss Trip", "Jane,Krish,Joey", "1,7,3", "SGD", "open","12/33/44"),
+(2, 1, "Girls Trip to Bali","Jane,Mary,Joey", "1,2,3", "SGD", "open","12/03/22"),
+(3,5,"23 Japan Trip","Ron,Monica,Chandler,Krish,Prakash", "4,5,6,7,8", "SGD", "open","12/04/23")
 
 -- SQL statements
 -- USE heap15_group;
