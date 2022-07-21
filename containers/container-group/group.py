@@ -27,8 +27,9 @@ class Group(db.Model):
     user_ids = db.Column(db.String(256))
     home_currency = db.Column(db.String(256))
     group_status = db.Column(db.String(256))
+    trip_duration = db.Column(db.String(256))
 
-    def __init__(self, group_id, owner_id, group_name, group_members, user_ids, home_currency, group_status):
+    def __init__(self, group_id, owner_id, group_name, group_members, user_ids, home_currency, group_status, trip_duration):
         self.group_id = group_id
         self.owner_id = owner_id
         self.group_name = group_name
@@ -36,11 +37,12 @@ class Group(db.Model):
         self.user_ids= user_ids
         self.home_currency = home_currency
         self.group_status = group_status
+        self.trip_duration = trip_duration
         
 
     def json(self):
         return {"group_id": self.group_id, "owner_id": self.owner_id, "group_name": self.group_name, "group_members": self.group_members, "user_ids": self.user_ids,
-        "home_currency": self.home_currency, "group_status": self.group_status}
+        "home_currency": self.home_currency, "group_status": self.group_status, "trip_duration": self.trip_duration}
 
 
 

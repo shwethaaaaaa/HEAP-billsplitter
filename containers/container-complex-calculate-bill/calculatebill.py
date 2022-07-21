@@ -50,7 +50,8 @@ def calculate_bill(group_id):
     try:
             # booking = request.get_json()
             print("\nReceived a request to calculate bill in JSON:")
-            result = process_bill(str(group_id))
+            group_id = str(group_id)
+            result = process_bill(group_id)
 
             return jsonify(result), result["code"]
 
@@ -129,8 +130,8 @@ def process_bill(group_id):
     #     net_amt_dict[member] = net_amt_of_person
     
     # print('this is dict: ' + str(net_amt_dict))
-
-
+     
+   
     group_members_string = final_data['group_members']
     group_members_list = group_members_string.split(',')
     all_transactions_in_grp = final_data['all_transactions']
@@ -299,10 +300,15 @@ def process_bill(group_id):
         ower_phone_no = ower_result['data']['phone_no']
         ower_name = ower_result['data']['user_name']
         
-
+        payment_settlement = []
         print("this is ower_phone_no: "+ str(ower_phone_no))
         print("this is ower_name: " + ower_name)
         print("this is amt to pay: "+ str(amt_to_pay))
+        payment_array = [payer_name, ower_name,amt_to_pay]
+        print(payment_array)
+        payment_settlement.append(payment_array)
+        print(payment_settlement)
+        
 
 
 
@@ -356,6 +362,8 @@ def process_bill(group_id):
 
     
     minCashFlow(input_graph)
+
+    payment_settlement = final_data["payment_settlement"]
 
 
 
