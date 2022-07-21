@@ -81,7 +81,7 @@ def get_all_groups():
             {
                 "code": 200,
                 "data": {
-                    "users": [group.json() for group in grouplist]
+                    "groups": [group.json() for group in grouplist]
                 }
             }
         )
@@ -92,29 +92,42 @@ def get_all_groups():
         }
     ), 404
 
+
 ################################################################################################
-@app.route("/group/<int:_id>")
-def get_group_by_id(group_id):
-    group = Group.query.filter_by(group_id=group_id).first()
-    if group:
+# get_groups_by_user_id - GET Request returning groups belonging to a particular user id
+@app.route('/get_groups_by_user_id/<int:user_id>')
+def get_groups_by_user_id(user_id):
+    grouplist = Group.query.all()
+    newgrouplist = [group.json() for group in grouplist]
+    new_groups_list = []
+    for group_dict in newgrouplist:
+        str_of_user_ids = group_dict["user_ids"]
+        list_of_user_ids = str_of_user_ids.split(",")
+        # print(list_of_user_ids)
+        if str(user_id) in list_of_user_ids:
+            new_groups_list.append(group_dict)
+    # print (new_groups_list)
+    if len(grouplist):
         return jsonify(
             {
                 "code": 200,
-                "data": group.json()
+                "data": {
+                    "groups": new_groups_list
+                }
             }
         )
     return jsonify(
         {
             "code": 404,
-            "message": "Group not found."
+            "message": "There are no groups."
         }
     ), 404
 
 
-################################################################################################
+
+    
 
 ################################################################################################
-# get_group_by_id() - GET request returning a group by group_id # (Notee: we may need a diff function to get all open & close groups separately)
 @app.route("/group/<int:group_id>")
 def get_group_by_id(group_id):
     group = Group.query.filter_by(group_id=group_id).first()
@@ -131,6 +144,9 @@ def get_group_by_id(group_id):
             "message": "Group not found."
         }
     ), 404
+
+
+################################################################################################
 
 ################################################################################################
 # create_new_group() - POST request creating a new group
