@@ -57,12 +57,20 @@ export default function TransactionTable() {
     //   ];
 
     const rows = []; // to be called form transaction MS
+    
+    const queryString = window.location.search.slice(1)
+    const querylist = queryString.split("?")
+    const trip_location = querylist[0]
+    const group_id = querylist[1]
 
-    const groupName = "Trip XX"  // to be rerieved from Group MS
+    const groupName = "Trip to "  + trip_location// to be rerieved from Group MS
+
+    // change the below later - retrieve via URL!!
     const duration = "12/03/23 - 20/03/23" // to be rerieved from group MS
 
-    const Unsplash_API_URL = 'https://api.unsplash.com/search/photos?client_id=Tnkm6qLI-aFFmxeB_YxL_lZfMwTNqX4W9T7JhYjqHfg&query=Greece&orientation=landscape'
-    const Transaction_API_URL = 'http://localhost:5003/transaction/4' // hardcoded to group 4 now!
+    const Unsplash_API_URL = 'https://api.unsplash.com/search/photos?client_id=Tnkm6qLI-aFFmxeB_YxL_lZfMwTNqX4W9T7JhYjqHfg&query=' + trip_location + '&orientation=landscape'
+    const Transaction_API_URL = 'http://localhost:5003/transaction/' + group_id// hardcoded to group 4 now!
+    console.log(Transaction_API_URL )
 
     
     // + 
