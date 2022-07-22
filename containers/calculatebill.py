@@ -29,9 +29,9 @@ auth_token = 'efec227ffff8078c529508b7bd666340'
 # auth_token = os.environ[TWILIO_AUTH_TOKEN] 
 client = Client(account_sid, auth_token)
 
-group_URL = environ.get('group_URL') or " http://localhost:5002/group/"
-transaction_URL =  environ.get('transaction_URL') or "http://localhost:5003/transaction/"
-user_URL = environ.get('user_URL') or "http://localhost:5007/get_user_by_user_id/"
+group_URL = environ.get('group_URL') or "http://192.168.18.28:5002/group/"
+transaction_URL =  environ.get('transaction_URL') or "http://192.168.18.28:5003/transaction/"
+user_URL = environ.get('user_URL') or "http://192.168.18.28:5007/get_user_by_user_id/"
 # notify_URL = environ.get('notify_URL') or "http://notfiy:5006/" #incomplete
 
 
@@ -71,6 +71,7 @@ def calculate_bill(group_id):
 def process_bill(group_id):
 
     final_data = {'group_id': group_id}
+    payment_settlement = []
   
 
     # STEP 1. get group details from group MS using group_id
@@ -131,7 +132,7 @@ def process_bill(group_id):
     
     # print('this is dict: ' + str(net_amt_dict))
      
-   
+    
     group_members_string = final_data['group_members']
     group_members_list = group_members_string.split(',')
     all_transactions_in_grp = final_data['all_transactions']
@@ -300,7 +301,7 @@ def process_bill(group_id):
         ower_phone_no = ower_result['data']['phone_no']
         ower_name = ower_result['data']['user_name']
         
-        payment_settlement = []
+        
         print("this is ower_phone_no: "+ str(ower_phone_no))
         print("this is ower_name: " + ower_name)
         print("this is amt to pay: "+ str(amt_to_pay))
@@ -363,7 +364,7 @@ def process_bill(group_id):
     
     minCashFlow(input_graph)
 
-    payment_settlement = final_data["payment_settlement"]
+    final_data["payment_settlement"] = payment_settlement
 
 
 
