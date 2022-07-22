@@ -29,9 +29,9 @@ auth_token = 'efec227ffff8078c529508b7bd666340'
 # auth_token = os.environ[TWILIO_AUTH_TOKEN] 
 client = Client(account_sid, auth_token)
 
-group_URL = environ.get('group_URL') or "http://192.168.18.28:5002/group/"
-transaction_URL =  environ.get('transaction_URL') or "http://192.168.18.28:5003/transaction/"
-user_URL = environ.get('user_URL') or "http://192.168.18.28:5007/get_user_by_user_id/"
+group_URL = environ.get('group_URL') or "http://localhost:5002/group/"
+transaction_URL =  environ.get('transaction_URL') or "http://localhost:5003/transaction/"
+user_URL = environ.get('user_URL') or "http://localhost:5007/get_user_by_user_id/"
 # notify_URL = environ.get('notify_URL') or "http://notfiy:5006/" #incomplete
 
 
@@ -315,19 +315,19 @@ def process_bill(group_id):
 
         # STEP 5: CALL TWILIO
        
-       # notify ower
-        message = client.messages.create (
-                    body = 'Hi ' +  ower_name + ' you have to pay ' + payer_name + ' '+ str(amt_to_pay) ,
-                    from_='+12517322643',
-                    to = ower_phone_no
-                )
+    #    # notify ower
+    #     message = client.messages.create (
+    #                 body = 'Hi ' +  ower_name + ' you have to pay ' + payer_name + ' '+ str(amt_to_pay) ,
+    #                 from_='+12517322643',
+    #                 to = ower_phone_no
+    #             )
 
-        # notify reciever
-        message = client.messages.create (
-                    body = 'Hi ' +  ower_name + ' will pay you this amount: ' + str(amt_to_pay),
-                    from_='+12517322643',
-                    to = payer_phone_no
-                )      
+    #     # notify reciever
+    #     message = client.messages.create (
+    #                 body = 'Hi ' +  ower_name + ' will pay you this amount: ' + str(amt_to_pay),
+    #                 from_='+12517322643',
+    #                 to = payer_phone_no
+    #             )      
       
             
 

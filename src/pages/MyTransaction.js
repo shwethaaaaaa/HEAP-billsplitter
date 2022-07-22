@@ -17,8 +17,8 @@ export default function MyTransaction(){
     // const [query, setQuery] = useState('');
 
     // for DEBIT TABLE (Hardcoded now to user_id 1 = Jane for now!!)
-    const Debit_API_URL = 'http://localhost:5003/transaction_to_paid/1' 
-    const Credit_API_URL = 'http://localhost:5003/transaction_to_be_owed/1'
+    const Debit_API_URL = 'http://localhost:5003/transaction_to_paid/4' 
+    const Credit_API_URL = 'http://localhost:5003/transaction_to_be_owed/4'
     // + 
     // query +
     //  "/";
@@ -38,14 +38,14 @@ export default function MyTransaction(){
     return (
         <>
             <div id="api-display-card">
-                { errorDebit &&  <p>An error occurred while retrieving the data. </p> }
-                { isPendingDebit && <p>An error occurred while retrieving the data. </p> }
+                { errorDebit &&  <p>An error occurred while retrieving the debit table data. </p> }
+                { isPendingDebit && <p>An error occurred while retrieving the debit table data. </p> }
                 { DebitData && <DebitTable debitdata={ DebitData } /> }
             </div>
 
             <div id="api-display-card">
-                { errorCredit &&  <p>An error occurred while retrieving the data. </p> }
-                { isPendingCredit && <p>An error occurred while retrieving the data. </p> }
+                { errorCredit &&  <p>An error occurred while retrieving the credit table data. </p> }
+                { isPendingCredit && <p>An error occurred while retrieving the credit table data. </p> }
                 { CreditData && <CreditTable creditdata={ CreditData } /> }
             </div>
   </>

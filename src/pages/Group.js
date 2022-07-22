@@ -122,7 +122,7 @@ export default function TransactionTable() {
               Add Transaction
             </Button>
 
-            <Button href = "/GroupFinalTransaction" className = "m-4" variant="danger" size="lg">
+            <Button href = {`./GroupFinalTransaction?${group_id}`} className = "m-4" variant="danger" size="lg">
               Exit Group
             </Button>
           </div>

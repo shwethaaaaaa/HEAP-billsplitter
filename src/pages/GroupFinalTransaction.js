@@ -4,36 +4,33 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Table from 'react-bootstrap/Table';
+import useFetch from './useFetch';
+import GroupFinalTransactionTable from './GroupFinalTransactionTable';
 
 
 export default function GroupFinalTransaction(){
+    const queryString1 = window.location.search.slice(1)
+    const querylist = queryString1.split("?")
+    const group_ID = querylist[0]
+    const CalculateBill_API_URL = 'http://localhost:5004/calculate_bill/' + group_ID
+
+    const {
+        data: FinalTransactionsData, 
+        isPendingcb, 
+        errorcb
+    } = useFetch(CalculateBill_API_URL, "GET");
+
     return (
         <>
-            <br></br>
-            <br></br>
-            <h2>Final (Trip to Swiss :D) Transactions</h2>
-            <Table striped bordered hover variant="dark">
-            <thead>
-            <tr>
-                <th>Payer</th>
-                <th>Recipient </th>
-                <th>Amount</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>Jacob</td>
-                <td>Otto</td>
-                <td>20</td>
-            </tr>
-            <tr>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>10</td>
-            </tr>
-            </tbody>
-        </Table>
-      </>
+
+            <div id="api-display-card">
+                            { errorcb &&  <p>An error occurred while retrieving the final transactions data data. </p> }
+                            { isPendingcb && <p>An error occurred while retrieving the final transactions data. </p> }
+                            { FinalTransactionsData && <GroupFinalTransactionTable finaltransactionsdata={ FinalTransactionsData} /> }
+            </div>
+
+
+        </>
 
     )
 
