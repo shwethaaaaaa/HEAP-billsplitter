@@ -10,7 +10,7 @@ import { Outlet, Link } from "react-router-dom";
 
 //need to use map function to create a card for each group
 export default function Home(){
-    const Group_API_URL = 'http://localhost:5002/get_groups_by_user_id/7' 
+    const Group_API_URL = 'http://localhost:5002/get_groups_by_user_id/3' 
 
     const {
         data: MyGroupsData, 

@@ -9,6 +9,7 @@ import Col from 'react-bootstrap/Col';
 
 export default function MyGroupCards({mygroupsdata}){
     const MyGroups =  mygroupsdata.data.groups
+    console.log(MyGroups)
     return(
          <>
             <Container className='mt-5'>
@@ -21,14 +22,14 @@ export default function MyGroupCards({mygroupsdata}){
                                             <Card.Title>{option.group_name}</Card.Title>
                                             <Card.Text>Trip Duration: {option.trip_duration}</Card.Text>
                                             <Card.Text>Group Members: {option.group_members}</Card.Text>
-                                            <Button href = {`./Group?${option.group_name}?${option.group_id}`} variant="primary">View Group</Button>
+                                            <Button href = {`./Group?${option.group_name}?${option.group_id}?${option.trip_duration}`} variant="primary">View Group</Button>
                                         </Card.Body>
                             </Card>
                         </Col>
                     </Row>
                 ))}
                 <Row>
-                <Button href = "./CreateNewGroup"  variant="dark">Create New Group</Button>
+                <Button href = "./CreateGroup"  variant="dark">Create New Group</Button>
                 </Row>
             </Container>
   
