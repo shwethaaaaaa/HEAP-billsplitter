@@ -8,10 +8,20 @@ function useFetch(url, method, body) {
     useEffect(() => {
         const abortCont = new AbortController();
 
-        fetch(url, { method: method, signal: abortCont.signal, body: body })
+        fetch(url, { method: method, signal: abortCont.signal, body:body ,  mode: 'cors', headers : { 
+            'Content-Type': 'application/json'
+        } } )
         .then((res) => {
+
+            console.log(res)
+
+           
             if (!res.ok) {
-                throw Error("Data could not be retrieved");
+                const error = (data && data.message) || res.status;
+
+                console.log(Promise.reject(error))
+
+                // throw Error("Data could not be retrieved");
             }
             return res.json();
         })
@@ -30,7 +40,7 @@ function useFetch(url, method, body) {
         });
 
         return () => abortCont.abort();
-    }, [url, method]);
+    }, [url, method, body]);
 
     return { data, isPending, error, setData };
 }

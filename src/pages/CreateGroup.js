@@ -35,8 +35,7 @@ export default function AddingNewGroup(){
             } = useFetch(User_API_URL, "GET");
 
             console.log(userdata)
-            const allUsersIntList = userdata.data.users
-            console.log(allUsersIntList)
+           
             // const userids = []
             // const groupmembers = "randomname"
             // const [userids, setuserids] = useState("");
@@ -46,19 +45,7 @@ export default function AddingNewGroup(){
             // const [tripduration, settripduration] = useState("");
           
             
-            // const handleForm = (event) => {
-            //     const Group_API_URL = 'http://192.168.68.103:5002/group/';
-       
-
-            //     const {
-            //         data2, 
-            //         isPending2, 
-            //         error2
-            //     } = useFetch(Group_API_URL, "POST",{ group_name:grpname , group_members: groupmembers, owner_id:ownerid, user_ids: userids, home_currency: currency, trip_duration:tripduration});
-    
-        
-                
-            // };
+          
 
 
             
@@ -84,13 +71,7 @@ export default function AddingNewGroup(){
                 { userdata && <CreateGroupForm userdata={ userdata } /> }
             </div>
 
-            <div >
-               
-                { error && <p>There is some error in fetching users</p> }
-                { isPending && <p>users Pending</p> }
-                { userdata && <CreateGroupForm userdata={allUsersIntList  } /> }
-            </div>
-             
+           
         </>
 
     );

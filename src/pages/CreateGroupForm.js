@@ -3,16 +3,24 @@ import TextField from '@mui/material/TextField';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import useFetch from './useFetch';
-
 import MenuItem from '@mui/material/MenuItem';
-
-import  { useState } from 'react';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
+import { useTheme } from '@mui/material/styles';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import InputLabel from '@mui/material/InputLabel';
+
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+
+import { useEffect, useState } from 'react';
+
+import CallNewGroupMS from './CallNewGroupMS';
 
 
 
 export default function CreateGroupForm({userdata}){
+    
     const currencies = [
         {
         value: 'SGD',
@@ -32,61 +40,120 @@ export default function CreateGroupForm({userdata}){
         },
     ];
 
-    // const [currency, setCurrency] = React.useState('SGD');
-    // const handleChange2 = (event) => {
-    //     setCurrency(event.target.value);
-    // };
+    // function getStyles(name, groupmembers, theme) {
+    //     return {
+    //       fontWeight:
+    //         groupmembers.indexOf(name) === -1
+    //           ? theme.typography.fontWeightRegular
+    //           : theme.typography.fontWeightMedium,
+    //     };
+    //   }
+    const [submitForm, setsubmitForm] = React.useState(false)
+    const theme = useTheme();
+    const [ownerids, setownerids] = React.useState([]);
+
+    const handleChange4 = (event) => {
+    const {
+        target: { value },
+    } = event;
+    setownerids(
+        // On autofill we get a stringified value.
+        typeof value === 'string' ? value.split(',') : value,
+    );
+    };
+
+    const allUsersIntList = userdata.data.users
+    console.log(allUsersIntList)
+  
+    const groupmembers = ['sample1', 'sample2']
+    const [currency, setcurrency] = React.useState('SGD');
+    const handleChange5 = (event) => {
+        setcurrency(event.target.value);
+    };
+    const [groupname, setgroupname] = React.useState("");
+    const [groupadmin, setgroupadmin] = React.useState("");
+    const [tripduration, settripduration] = React.useState("");
+    const handleChange1 = (event) => {
+        setgroupname(event.target.value);
+    };
+    const handleChange2 = (event) => {
+        setgroupadmin(event.target.value);
+    };
+    const handleChange3 = (event) => {
+        settripduration(event.target.value);
+    };
+    const finuserids = ownerids.join()
+    const groupdata = {
+        group_name:groupname , group_members: groupmembers, owner_id:groupadmin, user_ids: finuserids, home_currency: currency, trip_duration:tripduration
+    }
+
+
+    const handleForm = () => {
+           
+        setsubmitForm(true);
+
+
+            
+        };
+
     return(
 
     
     <>
-    
+         
         <Container fluid="sm" className='mt-5   '>
                 
             <Row className = 'mx-4'>
-                <TextField id="outlined-basic" label="Group Name" variant="outlined"  />
+                <TextField id="outlined-basic" label="Group Name" variant="outlined" value = {groupname} onChange={handleChange1}  />
             </Row>
             <br/>
             <Row className = 'mx-4'>
-                <TextField id="outlined-basic" label="Group Admin" variant="outlined"  />
+                <TextField id="outlined-basic" label="Group Admin" variant="outlined" value = {groupadmin} onChange={handleChange2} />
             </Row>
             <br/>
             <Row className = 'mx-4'>
-                <TextField id="outlined-basic" label="Trip Duration" variant="outlined" placeholder ='DD/MM/YY - DD/MM/YY'    />
+                <TextField id="outlined-basic" label="Trip Duration" variant="outlined" placeholder ='DD/MM/YY - DD/MM/YY' value = {tripduration} onChange={handleChange3}   />
             </Row>
             <br/>
             
-            <Row className = 'mx-4'>
-                <TextField
-                        id="outlined-select-currency"
-                        select
-                        label="Group Members"
-                        
+            
+   
+            <Row >
+                <div>
+                    <FormControl sx={{ m: 1, width: 1250 }}>
+                        <InputLabel id="demo-multiple-name-label">Group Members</InputLabel>
+                        <Select
+                        labelId="demo-multiple-name-label"
+                        id="demo-multiple-name"
                         multiple
-                        helperText=""
-                        
-                    >
-                        {userdata.map((option) => (
-                        <MenuItem key={option.user_id} value={option.user_ids}>
-                            {option.user_name}
-                        </MenuItem>
+                        value={ownerids}
+                        onChange={handleChange4}
+                        input={<OutlinedInput label="Group Members" />}
+                       
+                        >
+                        {allUsersIntList.map((user) => (
+                            <MenuItem
+                            key={user.user_name}
+                            value={user.user_id}
+                           
+                            >
+                            {user.user_name}
+                            </MenuItem>
                         ))}
-                    </TextField>
+                        </Select>
+                    </FormControl>
+                </div>
             </Row>
-            <br/>
         
-            <Row className = 'mx-4'>
             
-                <input type='file' variant='outlined' label="Group Image"></input>
-            </Row>
             <br/>
             <Row className = 'mx-4'>         
                 <TextField
                     id="outlined-select-currency"
                     select
                     label="Home Currency"
-                
-                    // onChange={handleChange2}
+                    value = {currency}
+                    onChange={handleChange5}
                     helperText=""
                     
                 >
@@ -99,7 +166,8 @@ export default function CreateGroupForm({userdata}){
             </Row>
             <br/>
             <Row className = 'mx-4'>
-                <Button variant="contained" >Create Group</Button>
+                <Button variant="contained" onClick = {handleForm}>Create Group</Button>
+                {submitForm && <CallNewGroupMS groupdata ={ groupdata }/> }
             </Row>
             
         
