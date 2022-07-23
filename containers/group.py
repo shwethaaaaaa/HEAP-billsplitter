@@ -166,10 +166,15 @@ def create_new_group():
     try:
         group_info = request.get_json()
         print(group_info)
+        print(type(group_info))
+        group_info["group_members"] = str(group_info["group_members"])
         new_group = Group(Group.group_id, group_status = "open", **group_info) # the user will provide everything else except the GroupID
         db.session.add(new_group)
         db.session.commit()
+        print("something")
     except Exception as e:
+        print(e)
+
         return jsonify(
             {
                 "code": 500,
@@ -180,7 +185,7 @@ def create_new_group():
     return jsonify(
         {
             "code": 201,
-            "data": new_group.json()
+            "data": "helloooo"
         }
     ), 201
 

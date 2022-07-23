@@ -60,12 +60,13 @@ export default function CreateGroupForm({userdata}){
         // On autofill we get a stringified value.
         typeof value === 'string' ? value.split(',') : value,
     );
+
     };
 
     const allUsersIntList = userdata.data.users
     console.log(allUsersIntList)
   
-    const groupmembers = ['sample1', 'sample2']
+
     const [currency, setcurrency] = React.useState('SGD');
     const handleChange5 = (event) => {
         setcurrency(event.target.value);
@@ -82,19 +83,31 @@ export default function CreateGroupForm({userdata}){
     const handleChange3 = (event) => {
         settripduration(event.target.value);
     };
+    
+   
+    const groupmembers = []
+   
+    for ( var id of ownerids){
+        console.log(id)
+        for ( var person of allUsersIntList){
+            if (person["user_id"] == id){
+                groupmembers.push(person["user_name"])
+            }
+        }
+
+    }
+    const fingroupmembers = groupmembers.join()
     const finuserids = ownerids.join()
     const groupdata = {
-        group_name:groupname , group_members: groupmembers, owner_id:groupadmin, user_ids: finuserids, home_currency: currency, trip_duration:tripduration
+        group_name:groupname , group_members: fingroupmembers, owner_id:groupadmin, user_ids: finuserids, home_currency: currency, trip_duration:tripduration
     }
-
-
     const handleForm = () => {
-           
+        
         setsubmitForm(true);
-
-
-            
+      
         };
+    console.log(groupmembers)
+    console.log(groupdata)
 
     return(
 

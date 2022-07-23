@@ -4,10 +4,13 @@ function useFetch(url, method, body) {
     const [data, setData] = useState(null);
     const [isPending, setIsPending] = useState(true);
     const [error, setError] = useState(null);
+    var bodyInput = body
+    console.log(bodyInput)
 
     useEffect(() => {
         const abortCont = new AbortController();
-
+        console.log(bodyInput)
+        
         fetch(url, { method: method, signal: abortCont.signal, body:body ,  mode: 'cors', headers : { 
             'Content-Type': 'application/json'
         } } )
@@ -17,15 +20,18 @@ function useFetch(url, method, body) {
 
            
             if (!res.ok) {
-                const error = (data && data.message) || res.status;
+                // const error = (data && data.message) || res.status;
+                // console.log("anything")
 
-                console.log(Promise.reject(error))
+                // console.log(Promise.reject(error))
 
-                // throw Error("Data could not be retrieved");
+                throw Error("Data could not be retrieved");
             }
             return res.json();
         })
         .then((data) => {
+            console.log("line 30")
+            console.log(data)
             setData(data);
             setIsPending(false);
             setError(null);
