@@ -118,7 +118,7 @@ export default function TransactionTable() {
 
 
           <div className="mb-2">
-            <Button href = "/AddTransaction" variant="primary" size="lg">
+            <Button href = {`/CreateTransactionForm?${group_id}`}variant="primary" size="lg">
               Add Transaction
             </Button>
 

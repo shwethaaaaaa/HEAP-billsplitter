@@ -121,8 +121,8 @@ def create_new_transaction(group_id):
         transaction_info = request.get_json()
         print(transaction_info)
         #Complex needs to check , if the payer and ower is in group and check if group id exist 
-        amount= transaction_info["amount"] 
-        exchange_rate = transaction_info["Exchange_rate"]
+        amount= float(transaction_info["amount"])
+        exchange_rate = float(transaction_info["Exchange_rate"])
         
         if amount <=0 :
              return jsonify(
@@ -147,6 +147,7 @@ def create_new_transaction(group_id):
         
         
     except Exception as e:
+        print(e)
         return jsonify(
             {
                 "code": 500,

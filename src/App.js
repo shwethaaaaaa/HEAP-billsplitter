@@ -17,6 +17,8 @@ import Group from "./pages/Group";
 import Profile from "./pages/Profile";
 import MyTransaction from "./pages/MyTransaction.js";
 import GroupFinalTransaction from "./pages/GroupFinalTransaction.js";
+import CreateTransactionForm from "./pages/CreateTransactionForm";
+import CreateTransactionIntermediate from "./pages/CreateTransactionIntermediate.js";
 import CreateGroupForm from './pages/CreateGroupForm';
 
 
@@ -38,6 +40,8 @@ function App() {
                 <Route path="Profile" element={<Profile />} />
                 <Route path="CreateGroup" element={<CreateGroup />} />
                 <Route path="CreateTransaction" element={<CreateTransaction />} />
+                <Route path="CreateTransactionForm" element={<CreateTransactionForm />} />
+                <Route path="CreateTransactionIntermediate" element={<CreateTransactionIntermediate />} />
                 <Route path="Group" element={<Group />} /> 
                 <Route path = "MyTransaction" element = {<MyTransaction />} />
                 <Route path = "GroupFinalTransaction" element = {<GroupFinalTransaction />} />

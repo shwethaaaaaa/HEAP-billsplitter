@@ -1,89 +1,42 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import MenuItem from '@mui/material/MenuItem';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Button from 'react-bootstrap/Button';
+import useFetch from "./useFetch"
 
-  export default function AddTransaction() {
-    const currencies = [
-        {
-          value: 'USD',
-          label: '$',
-        },
-        {
-          value: 'EUR',
-          label: '€',
-        },
-        {
-          value: 'BTC',
-          label: '฿',
-        },
-        {
-          value: 'JPY',
-          label: '¥',
-        },
-      ];
-    const [currency, setCurrency] = React.useState('EUR');
-  
-    const handleChange = (event) => {
-      setCurrency(event.target.value);
-    };
-  
-    return (
-      <Box
-        component="form"
-        sx={{
-          '& .MuiTextField-root': { m: 1, width: '25ch' },
-        }}
-        noValidate
-        autoComplete="off"
-      >
-        <div style= {{ margin:'auto'}}>
-            <Container className='mt-5; ' >
-                <Row>
-                    <TextField id="outlined-basic" label="Paid By" variant="outlined" />
-                </Row>
-                <Row>
-                    <TextField id="outlined-basic" label="Paid On Behalf Of" variant="outlined" />
-                </Row>
-                <Row>
-                    <TextField id="outlined-basic" label="Amount" variant="outlined" />
-                </Row>
-                <Row>
-                    <TextField id="outlined-basic" label="Comments" variant="outlined" />
-                </Row>
-                <Row>
-                    <TextField
-                id="outlined-select-currency"
-                select
-                label="Select"
-                value={currency}
-                onChange={handleChange}
-                helperText="Please select your currency"
-            >
-                        {currencies.map((option) => (
-                        <MenuItem key={option.value} value={option.value}>
-                            {option.label}
-                        </MenuItem>
-                        ))}
-                    </TextField>
-                </Row>
-               
-            </Container>
-            <Button variant="primary">Add Transaction&nbsp;&nbsp;</Button>
-            
-          
-         
-        
-          
-          
-          
-          
-        </div>
-      </Box>
+export default function CreateTransaction(alldata) {
+
+    console.log(alldata)
+    
+    const payerdata =alldata.alldata[0]
+    const owerdata = alldata.alldata[1]
+    const transactiondata = alldata.alldata[2]
+
+    console.log(payerdata)
+    console.log(owerdata)
+    console.log(transactiondata)
+
+    const groupid = transactiondata.transactiondata.group_id
+    const Transaction_API_URL = 'http://192.168.18.28:5003/transaction/'+ String(groupid);
+
+    console.log(transactiondata.transactiondata)
+    console.log(Transaction_API_URL)
+
+    const post_input = { "payer_id":transactiondata.transactiondata.payer_id , "ower_id":transactiondata.transactiondata.ower_id ,"amount":transactiondata.transactiondata.amount, "payer":payerdata.data.user_name, "ower":owerdata.data.user_name , "Exchange_rate":transactiondata.transactiondata.Exchange_rate, "description":transactiondata.transactiondata.description , "group_id": transactiondata.transactiondata.group_id
+    
+    }
+
+    console.log(post_input)
+    
+    const {
+        data2, 
+        isPending2, 
+        error2
+    } = useFetch(Transaction_API_URL, "POST", JSON.stringify(post_input));
+
+
+    return(
+        <>
+                { error2 && <p>There is some error in adding transaction</p> }
+                { isPending2 && <p>transaction Pending</p> }
+                { data2 && <p>successfully added</p>  }
+        </>
     );
+    
   }
-  
