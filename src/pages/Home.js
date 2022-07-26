@@ -9,8 +9,9 @@ import { Outlet, Link } from "react-router-dom";
 
 
 //need to use map function to create a card for each group
-export default function Home(){
-    const Group_API_URL = 'http://localhost:5002/get_groups_by_user_id/3' 
+export default function Home({useriddata}){
+    console.log(useriddata)
+    const Group_API_URL = 'http://localhost:5002/get_groups_by_user_id/' + String(useriddata)
 
     const {
         data: MyGroupsData, 

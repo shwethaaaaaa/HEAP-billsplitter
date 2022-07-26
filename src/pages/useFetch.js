@@ -5,7 +5,8 @@ function useFetch(url, method, body) {
     const [isPending, setIsPending] = useState(true);
     const [error, setError] = useState(null);
     var bodyInput = body
-    console.log(bodyInput)
+    // console.log(bodyInput)
+    console.log(url)
 
     useEffect(() => {
         const abortCont = new AbortController();

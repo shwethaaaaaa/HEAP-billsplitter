@@ -22,8 +22,8 @@ const Layout = ({useriddata}) => {
               alt="BillSplitter Logo"></Image>
             <Navbar.Brand href="#home">BillSplitter</Navbar.Brand>
             <Nav className="me-auto">
-              <Nav.Link href="/">My Groups</Nav.Link>
-              <Nav.Link href={`MyTransaction?${useriddata}`}>My Transactions</Nav.Link>
+              <Nav.Link href={`/`}>My Groups</Nav.Link>
+              <Nav.Link href={`MyTransaction`}>My Transactions</Nav.Link>
             </Nav>
           </Container>
         </Navbar>

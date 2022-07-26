@@ -6,7 +6,7 @@ import CallingLogin from './CallingLogin';
 import { Link } from "react-router-dom";
 
 
-export default function UserLogin () {
+export default function UserLogin ({myfunction, useriddata}) {
 
     const [email, setEmail] = React.useState('')
     const [password, setPassword] = React.useState('')
@@ -76,7 +76,7 @@ export default function UserLogin () {
           </button>
       
 
-        {submitForm && <CallingLogin userdata ={[email, password]}/> }
+        {submitForm && <CallingLogin userdata ={[email, password, useriddata] } myfunction = {myfunction} /> }
 
         </div>
     </>
