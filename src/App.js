@@ -9,17 +9,19 @@ import * as React from 'react';
 // import AddTransaction from './components/AddTransaction.js'
 // import TransactionTable from './components/TransactionTable.js';
 // import Navbar from './components/Navbar.js';
-import Layout from "./pages/Layout.js";
+import Layout from "./pages/Layout";
 import CreateGroup from "./pages/CreateGroup";
 import CreateTransaction from "./pages/CreateTransaction";
 import Home from "./pages/Home";
 import Group from "./pages/Group";
 import Profile from "./pages/Profile";
-import MyTransaction from "./pages/MyTransaction.js";
-import GroupFinalTransaction from "./pages/GroupFinalTransaction.js";
+import MyTransaction from "./pages/MyTransaction";
+import GroupFinalTransaction from "./pages/GroupFinalTransaction";
 import CreateTransactionForm from "./pages/CreateTransactionForm";
 import CreateTransactionIntermediate from "./pages/CreateTransactionIntermediate.js";
 import CreateGroupForm from './pages/CreateGroupForm';
+import UserLogin from './pages/Userlogin';
+import UserSignup from './pages/Usersignup';
 
 
 
@@ -31,7 +33,7 @@ import CreateGroupForm from './pages/CreateGroupForm';
 function App() {
   return (
     <div className="App">
-      <style>{'body { background-color: #f6e8eb;  background-image: linear-gradient(to bottom right, pink, blue)}'}</style>
+      <style>{'body { background-color: #f6e8eb;'}</style>
      
         <BrowserRouter>
           <Routes>
@@ -45,6 +47,8 @@ function App() {
                 <Route path="Group" element={<Group />} /> 
                 <Route path = "MyTransaction" element = {<MyTransaction />} />
                 <Route path = "GroupFinalTransaction" element = {<GroupFinalTransaction />} />
+                <Route path = "UserLogin" element = {<UserLogin />}></Route>
+                <Route path = "UserSignup" element = {<UserSignup />}></Route>
             </Route>
             
           </Routes>

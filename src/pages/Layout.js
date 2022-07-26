@@ -4,7 +4,10 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Image from 'react-bootstrap/Image'
 
-const Layout = () => {
+const Layout = ({useriddata}) => {
+
+  console.log(useriddata)
+  
   return (
     <>
       {
@@ -20,7 +23,7 @@ const Layout = () => {
             <Navbar.Brand href="#home">BillSplitter</Navbar.Brand>
             <Nav className="me-auto">
               <Nav.Link href="/">My Groups</Nav.Link>
-              <Nav.Link href="MyTransaction">My Transactions</Nav.Link>
+              <Nav.Link href={`MyTransaction?${useriddata}`}>My Transactions</Nav.Link>
             </Nav>
           </Container>
         </Navbar>

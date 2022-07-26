@@ -70,16 +70,15 @@ def get_all_users():
     ), 404
 
 ################################################################################################
-@app.route('/user_login', methods=["POST"])
-def user_login():
-    data = request.get_json()
-    email = data["email"]
+@app.route('/user_login/<string:email>/<string:password>', methods=["GET"])
+def user_login(email,password):
+
     try:
         user = User.query.filter_by(email=email).first()
         if user:
             user = user.json()
-            password = data["password"]
-            hashed_db_password = user["password"]
+            user_id = user['user_id']
+            hashed_db_password = user["password"] # just mimicing hash function
 
             if password != hashed_db_password:
                 return jsonify(
@@ -93,7 +92,9 @@ def user_login():
             return jsonify(
                 {
                     "code": 200,
-                    "message": "You have successfully logged in"
+                    "message": "You have successfully logged in",
+                    "user_id": user_id
+                    
                 }
             ), 200
 
