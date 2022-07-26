@@ -13,8 +13,8 @@ export default function MyGroupCards({mygroupsdata}){
     return(
          <>
             <Container className='mt-5'>
-                {MyGroups.map((option) => (
-                    <Row>
+                {MyGroups.map((option, idx) => (
+                    <Row key={ idx }>
                         <Col>
                             <Card style={{ width: '18rem' }} className='my-auto'>
                                         <Card.Img variant="top" src={require('./friendss.jpg')}/>

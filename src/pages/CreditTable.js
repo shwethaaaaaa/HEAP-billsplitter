@@ -25,8 +25,8 @@ export default function CreditTable({ creditdata }){
                      </tr>
                      </thead>
                      <tbody>
-                     {Transactions.map((option) => (
-                            <tr>
+                     {Transactions.map((option, idx) => (
+                            <tr key={ idx }>
                                  <td>{option.transaction_id}</td>
                                  <td>{option.group_id}</td>
                                  <td>{option.payer}</td>

@@ -21,8 +21,10 @@ export default function MyTransaction({useriddata}){
     console.log(useriddata)
 
     // for DEBIT TABLE (Hardcoded now to user_id 1 = Jane for now!!)
-    const Debit_API_URL = 'http://192.168.68.103:5003/transaction_to_paid/' + String(useriddata)
-    const Credit_API_URL = 'http://192.168.68.103:5003/transaction_to_be_owed/' + String(useriddata)
+    // const Debit_API_URL = 'http://192.168.68.103:5003/transaction_to_paid/' + String(useriddata)
+    // const Credit_API_URL = 'http://192.168.68.103:5003/transaction_to_be_owed/' + String(useriddata)
+    const Debit_API_URL = 'http://localhost:5003/transaction_to_paid/' + String(useriddata)
+    const Credit_API_URL = 'http://localhost:5003/transaction_to_be_owed/' + String(useriddata)
     // + 
     // query +
     //  "/";

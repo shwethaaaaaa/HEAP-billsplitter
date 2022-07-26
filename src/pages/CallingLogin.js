@@ -26,27 +26,26 @@ export default function CallingLogin({userdata,myfunction}){
     
 
         // const User_API_URL = `http:///192.168.68.103:5007/user_login/${email}/${password}`
-        const User_API_URL = `http://192.168.68.103:5007/user_login/` + email + "/" + password
+        // const User_API_URL = `http://192.168.68.103:5007/user_login/` + email + "/" + password
+        const User_API_URL = `http://localhost:5007/user_login/` + email + "/" + password
 
-        // const {
-        //     data, 
-        //     isPendingUser, 
-        //     errorUser
-        // } = useFetch(User_API_URL, "GET");
+        const {
+            data, 
+            isPendingUser, 
+            errorUser
+        } = useFetch(User_API_URL, "GET");
 
         // const another_data = data
-        const data = {"user_id":"1"}
         console.log("reached here!")
         console.log(data)
-        myfunction(data.user_id)
 
         useEffect(() => {
             if (data){
                 // settinguserid(data.user_id)
+                myfunction(data.user_id)
                 console.log(settinguserid)
                 console.log(data.user_id)
                 console.log(useriddata)
-
             }
            
             
