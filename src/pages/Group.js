@@ -71,7 +71,7 @@ export default function TransactionTable() {
     const duration = duration_of_trip// to be rerieved from group MS
 
     const Unsplash_API_URL = 'https://api.unsplash.com/search/photos?client_id=Tnkm6qLI-aFFmxeB_YxL_lZfMwTNqX4W9T7JhYjqHfg&query=' + trip_location + '&orientation=landscape'
-    const Transaction_API_URL = 'http://localhost:5003/transaction/' + group_id// hardcoded to group 4 now!
+    const Transaction_API_URL = 'http://192.168.68.103:5003/transaction/' + group_id// hardcoded to group 4 now!
     console.log(Transaction_API_URL )
 
     
