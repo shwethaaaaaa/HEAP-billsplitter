@@ -1,6 +1,6 @@
 # HEAP-SplitSmart
 </br>
-HEAP Project Group 15
+HEAP Project Group 15 : Sanofer, Shwetha, Kowsalya, Josita
 </br>
 </br>
 
