@@ -87,7 +87,6 @@ import Alert from 'react-bootstrap/Alert';
                 </Row>
                 <br/>
                 <Row classname = 'mx-4'>
- 
                     <TextField id="outlined-basic" label="Exchange Rate" variant="outlined" value={exchangerate} onChange={handleChange5}/>
                 </Row>
                

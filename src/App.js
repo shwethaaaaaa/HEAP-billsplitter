@@ -31,23 +31,25 @@ import UserSignup from './pages/Usersignup';
 
 
 function App() {
+  //create usestate for id
+  const [userid, setuserid] = React.useState("")
   return (
     <div className="App">
       <style>{'body { background-color: #f6e8eb;'}</style>
      
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Layout />}>
-                <Route index element={<Home />} />
+            <Route path="/" element={<Layout useriddata={userid}/>}>
+                <Route index element={<Home useriddata={userid}/>} />
                 <Route path="Profile" element={<Profile />} />
                 <Route path="CreateGroup" element={<CreateGroup />} />
                 <Route path="CreateTransaction" element={<CreateTransaction />} />
                 <Route path="CreateTransactionForm" element={<CreateTransactionForm />} />
                 <Route path="CreateTransactionIntermediate" element={<CreateTransactionIntermediate />} />
                 <Route path="Group" element={<Group />} /> 
-                <Route path = "MyTransaction" element = {<MyTransaction />} />
+                <Route path = "MyTransaction" element = {<MyTransaction useriddata={userid} />} />
                 <Route path = "GroupFinalTransaction" element = {<GroupFinalTransaction />} />
-                <Route path = "UserLogin" element = {<UserLogin />}></Route>
+                <Route path = "UserLogin" element = {<UserLogin myfunction = {setuserid} useriddata={userid} />}></Route>
                 <Route path = "UserSignup" element = {<UserSignup />}></Route>
             </Route>
             

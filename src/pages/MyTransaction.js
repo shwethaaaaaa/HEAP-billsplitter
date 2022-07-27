@@ -16,7 +16,7 @@ import Alert from 'react-bootstrap/Alert';
 
 
 
-export default function MyTransaction(){
+export default function MyTransaction({useriddata}){
 
     // const queryString = window.location.search.slice(1)
     // const querylist = queryString.split("?")
@@ -45,6 +45,10 @@ export default function MyTransaction(){
 //   </Name.Consumer>
 
     // const [query, setQuery] = useState('');
+    // const queryString = window.location.search.slice(1)
+    // const querylist = queryString.split("?")
+    // const useriddata = querylist[0]
+    console.log(useriddata)
 
     // for DEBIT TABLE (Hardcoded now to user_id 1 = Jane for now!!)
     const Debit_API_URL = 'http://localhost:5003/transaction_to_paid/1'
@@ -64,6 +68,9 @@ export default function MyTransaction(){
         isPendingCredit, 
         errorCredit
     } = useFetch(Credit_API_URL, "GET");
+
+    console.log(DebitData)
+    console.log(CreditData)
     
     return (
         <>

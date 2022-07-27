@@ -12,8 +12,7 @@ export default function MyGroupCards({mygroupsdata}){
     console.log(MyGroups)
     return(
          <>
-         <br></br>
-         <Container className='mt-5'>
+             <Container className='mt-5'>
                 {MyGroups.map((option) => (
                    
                     <Row className="ms-4" >
@@ -37,8 +36,6 @@ export default function MyGroupCards({mygroupsdata}){
                 </Row>
  
             </Container>
-
-  
 
          </>
      
