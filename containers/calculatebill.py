@@ -316,18 +316,18 @@ def process_bill(group_id):
         # STEP 5: CALL TWILIO
        
     #    # notify ower
-    #     message = client.messages.create (
-    #                 body = 'Hi ' +  ower_name + ' you have to pay ' + payer_name + ' '+ str(amt_to_pay) ,
-    #                 from_='+12517322643',
-    #                 to = ower_phone_no
-    #             )
+        message = client.messages.create (
+                    body = 'Hi ' +  ower_name + ' you have to pay ' + payer_name + ' '+ str(amt_to_pay) ,
+                    from_='+12517322643',
+                    to = ower_phone_no
+                )
 
-    #     # notify reciever
-    #     message = client.messages.create (
-    #                 body = 'Hi ' +  ower_name + ' will pay you this amount: ' + str(amt_to_pay),
-    #                 from_='+12517322643',
-    #                 to = payer_phone_no
-    #             )      
+        # notify reciever
+        message = client.messages.create (
+                    body = 'Hi ' +  ower_name + ' will pay you this amount: ' + str(amt_to_pay),
+                    from_='+12517322643',
+                    to = payer_phone_no
+                )      
       
             
 

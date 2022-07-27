@@ -15,14 +15,14 @@ CREATE TABLE `user` (
 
 -- import user
 INSERT INTO user (user_id, user_name, email, password, phone_no)
-VALUES (1, "Jane", "janedoe@gmail.com", "password", "12345678"),
-(2, "Mary", "marypotter@gmail.com", "password", "87654321"),
-(3, "Joey", "joeydoe@gmail.com", "password", "12345678"),
+VALUES (1, "Jane", "janedoe@gmail.com", "password", "+6591998490"),
+(2, "Mary", "marypotter@gmail.com", "password", "+6586613363"),
+(3, "Joey", "joeydoe@gmail.com", "password", "+6581614989"),
 (4, "Ron", "ron@gmail.com", "password", "+6594576312"),
-(5, "Monica", "monicafrens@gmail.com", "password", "+6581614989"),
+(5, "Monica", "monicafrens@gmail.com", "password", "+6591998490"),
 (6, "Chandler", "chandlerfrens@gmail.com", "password", "+6586613363"),
-(7, "Krish", "krazykrishfrens@gmail.com", "password", "12345678"),
-(8, "Prakash", "prakashfrens@gmail.com", "password", "12345678");
+(7, "Krish", "krazykrishfrens@gmail.com", "password", "+6581614989"),
+(8, "Prakash", "prakashfrens@gmail.com", "password", "+6594576312");
 
 -- SQL statements
 USE heap15_user;
