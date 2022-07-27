@@ -6,6 +6,8 @@ import Col from 'react-bootstrap/Col';
 import useFetch from './useFetch';
 import axios from 'axios';
 import React from 'react';
+import Badge from 'react-bootstrap/Badge';
+
 
 
 
@@ -45,7 +47,7 @@ export default function MyGroupCards({mygroupsdata}){
                                         <Card.Img variant="top" src= {option.image_url}/>
                                         <Card.Body>
                                             <Card.Title>{option.group_name}</Card.Title>
-                                            <Card.Text>Trip Duration: <b>{option.trip_duration}</b></Card.Text>
+                                            <Card.Text><Badge pill bg="warning" text="dark">Trip Duration: <b>{option.trip_duration}</b></Badge></Card.Text>
                                             <Card.Text>Group Members: <b>{option.group_members}</b></Card.Text>
                                             <Button href = {`./Group?${option.group_name}?${option.group_id}?${option.trip_duration}`} variant="primary">View Group</Button>
                                         </Card.Body>
