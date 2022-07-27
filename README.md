@@ -5,15 +5,15 @@ We aim to create an application which helps to simplify the process of bill-spli
  
 Use case Scenarios:
  
-Group Admin will login
-Go to the home page and explore the groups they are part of
-Goes to Create a new group for a new trip to Greece
-View's Bali Trip Group and Add transaction
-Once transaction is added admin views the transaction in trip group page
-Once her Bali trip ends, she clicks "End Trip"
-Calculatebill MS then calculates the bill and final payments are displayed
-Payers and Ower receive notifications on the amount to be paid.
-User can view past transactions in the My transactions Page
+1. Group Admin will login
+2. Go to the home page and explore the groups they are part of
+3. Goes to Create a new group for a new trip to Greece
+4. View's Bali Trip Group and Add transaction
+5. Once transaction is added admin views the transaction in trip group page
+6. Once her Bali trip ends, she clicks "End Trip"
+7. Calculatebill MS then calculates the bill and final payments are displayed
+8. Payers and Ower receive notifications on the amount to be paid.
+9. User can view past transactions in the My transactions Page
  
  
 Our application can be accessed via:
@@ -24,7 +24,7 @@ Method 1. Running manually on the computer
 For method 1, please follow the steps below:
  
 Pre-installation:
- 
+
 - pip3 install twilio https://www.twilio.com/docs/libraries/python
 - pip install Flask
 - pip install -U Flask-SQLAlchemy
