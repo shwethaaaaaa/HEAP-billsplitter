@@ -18,7 +18,7 @@ export default function GroupFinalTransactionTable({ finaltransactionsdata }){
                 <br></br>
                 <br></br>
                 <h2>Group {GroupName}'s Final Transactions</h2>
-                <div className='mx-3 mt-3'>
+                <div className='mx-3 mt-4'>
                     <Table striped bordered hover variant="dark">
                         <thead>
                         <tr>
