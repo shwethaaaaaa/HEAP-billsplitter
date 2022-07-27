@@ -31,7 +31,9 @@ VALUES (1,1,"Jane",1,"Krish",7,1.20,20.50,"Lunch"),
 (10,3,"Monica", 5, "Ron", 4, 1.00,15,"breakfast"),
 (11,3,"Krish", 7, "Prakash", 8, 1.00,20,"breakfast"),
 (12,3,"Krish", 7, "Ron", 4, 1.00,12.50,"breakfast"),
-(13,4,"Jane", 1, "Monica", 5, 1.00,13,"Dinner");
+(13,4,"Jane", 1, "Monica", 5, 1.00,13,"Dinner"),
+(14,4, "Krish",7, "Joey", 3, 1.00, 26, "Shopping"),
+(15,4,"Monica",5, "Joey", 3, 1.00, 50, "Shopping");
 
 
 -- SQL statements

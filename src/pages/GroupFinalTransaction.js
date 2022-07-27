@@ -6,6 +6,8 @@ import Col from 'react-bootstrap/Col';
 import Table from 'react-bootstrap/Table';
 import useFetch from './useFetch';
 import GroupFinalTransactionTable from './GroupFinalTransactionTable';
+import Image from 'react-bootstrap/Image';
+import Alert from 'react-bootstrap/Alert';
 
 
 export default function GroupFinalTransaction(){
@@ -25,7 +27,10 @@ export default function GroupFinalTransaction(){
 
             <div id="api-display-card">
                             { errorcb &&  <p>An error occurred while retrieving the final transactions data data. </p> }
-                            { isPendingcb && <p>An error occurred while retrieving the final transactions data. </p> }
+                            { isPendingcb && <p>Pending!</p> }
+                            { !FinalTransactionsData &&  <Container><Alert key= "info" variant= "info">Please hold on while we are calculating your bill</Alert>
+                            </Container>
+                           }
                             { FinalTransactionsData && <GroupFinalTransactionTable finaltransactionsdata={ FinalTransactionsData} /> }
             </div>
 

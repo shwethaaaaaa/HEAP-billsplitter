@@ -12,26 +12,32 @@ export default function MyGroupCards({mygroupsdata}){
     console.log(MyGroups)
     return(
          <>
-            <Container className='mt-5'>
+         <br></br>
+         <Container className='mt-5'>
                 {MyGroups.map((option) => (
-                    <Row>
-                        <Col>
+                   
+                    <Row className="ms-4" >
+                        <Col className="mb-3" >
                             <Card style={{ width: '18rem' }} className='my-auto'>
                                         <Card.Img variant="top" src={require('./friendss.jpg')}/>
                                         <Card.Body>
                                             <Card.Title>{option.group_name}</Card.Title>
-                                            <Card.Text>Trip Duration: {option.trip_duration}</Card.Text>
-                                            <Card.Text>Group Members: {option.group_members}</Card.Text>
+                                            <Card.Text>Trip Duration: <b>{option.trip_duration}</b></Card.Text>
+                                            <Card.Text>Group Members: <b>{option.group_members}</b></Card.Text>
                                             <Button href = {`./Group?${option.group_name}?${option.group_id}?${option.trip_duration}`} variant="primary">View Group</Button>
                                         </Card.Body>
                             </Card>
                         </Col>
                     </Row>
+                   
+                   
                 ))}
-                <Row>
+                <Row className="mt-3">
                 <Button href = "./CreateGroup"  variant="dark">Create New Group</Button>
                 </Row>
+ 
             </Container>
+
   
 
          </>

@@ -1,4 +1,6 @@
 import useFetch from "./useFetch"
+import { Navigate } from "react-router-dom";
+import AddTransaction from "./CreateTransactionForm";
 
 export default function CreateTransaction(alldata) {
 
@@ -13,14 +15,14 @@ export default function CreateTransaction(alldata) {
     console.log(transactiondata)
 
     const groupid = transactiondata.transactiondata.group_id
-    const Transaction_API_URL = 'http://192.168.18.28:5003/transaction/'+ String(groupid);
+    const Transaction_API_URL = 'http://localhost:5003/transaction/'+ String(groupid);
 
     console.log(transactiondata.transactiondata)
     console.log(Transaction_API_URL)
 
     const post_input = { "payer_id":transactiondata.transactiondata.payer_id , "ower_id":transactiondata.transactiondata.ower_id ,"amount":transactiondata.transactiondata.amount, "payer":payerdata.data.user_name, "ower":owerdata.data.user_name , "Exchange_rate":transactiondata.transactiondata.Exchange_rate, "description":transactiondata.transactiondata.description , "group_id": transactiondata.transactiondata.group_id
-    
-    }
+     }
+
 
     console.log(post_input)
     
@@ -35,7 +37,7 @@ export default function CreateTransaction(alldata) {
         <>
                 { error2 && <p>There is some error in adding transaction</p> }
                 { isPending2 && <p>transaction Pending</p> }
-                { data2 && <p>successfully added</p>  }
+                { data2 && <p>Sucessfully added!</p>}
         </>
     );
     

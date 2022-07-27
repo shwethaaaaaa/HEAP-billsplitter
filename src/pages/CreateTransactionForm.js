@@ -12,6 +12,7 @@ import CreateTransactionIntermediate from "./CreateTransactionIntermediate";
 import { useEffect, useState } from 'react';
 
 import CreateTransaction from './CreateTransaction';
+import Alert from 'react-bootstrap/Alert';
 
   export default function AddTransaction() {
    
@@ -56,6 +57,7 @@ import CreateTransaction from './CreateTransaction';
         payer_id:paidby , ower_id:paidfor,amount:amount , description:comments , Exchange_rate:exchangerate, group_id:groupid
     }
 
+    const group_id = transactiondata['group_id']
   
     return (
       <Box
@@ -67,30 +69,40 @@ import CreateTransaction from './CreateTransaction';
         autoComplete="off"
       >
         <div style= {{ margin:'auto'}}>
-            <Container className='mt-5; ' >
-                <Row>
+            <Container fluid="sm" className='mt-3'>
+                <Row classname = 'mx-4'>
                     <TextField id="outlined-basic" label="Paid By" variant="outlined" value={paidby} onChange={handleChange1}/>
                 </Row>
-                <Row>
+                <br/>
+                <Row classname = 'mx-4'>
                     <TextField id="outlined-basic" label="Paid On Behalf Of" variant="outlined" value={paidfor} onChange={handleChange2}/>
                 </Row>
-                <Row>
+                <br/>
+                <Row classname = 'mx-4'>
                     <TextField id="outlined-basic" label="Amount" variant="outlined" value={amount} onChange={handleChange3}/>
                 </Row>
-                <Row>
+                <br/>
+                <Row classname = 'mx-4'>
                     <TextField id="outlined-basic" label="Comments" variant="outlined" value={comments} onChange={handleChange4}/>
                 </Row>
-                <Row>
-                <TextField id="outlined-basic" label="Exchange Rate" variant="outlined" value={exchangerate} onChange={handleChange5}/>
+                <br/>
+                <Row classname = 'mx-4'>
+ 
+                    <TextField id="outlined-basic" label="Exchange Rate" variant="outlined" value={exchangerate} onChange={handleChange5}/>
                 </Row>
                
             </Container>
-            <Button variant="primary" onClick = {handlesubmit}>Add Transaction&nbsp;&nbsp;</Button> 
-
+ 
+            <Button classname="mt-5 mb-3" variant="primary" onClick = {handlesubmit}>Add Transaction&nbsp;&nbsp;</Button>
+ 
             {submitForm && <CreateTransactionIntermediate transactiondata ={ transactiondata }/> }
-          
+            {submitForm && <Alert key= "success" variant= "success">Transaction successfully added!</Alert>}
+
         </div>
+
       </Box>
     );
   }
+
+  
   

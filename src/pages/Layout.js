@@ -20,7 +20,7 @@ const Layout = ({useriddata}) => {
               style = {{borderRadius:"30px", marginRight: "20px"}}
               className="d-inline-block align-top"
               alt="BillSplitter Logo"></Image>
-            <Navbar.Brand href="#home">BillSplitter</Navbar.Brand>
+            <Navbar.Brand href="#home">SplitSmart</Navbar.Brand>
             <Nav className="me-auto">
               <Nav.Link href="/">My Groups</Nav.Link>
               <Nav.Link href={`MyTransaction?${useriddata}`}>My Transactions</Nav.Link>

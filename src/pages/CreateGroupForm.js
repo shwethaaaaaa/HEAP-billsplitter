@@ -16,7 +16,7 @@ import Select from '@mui/material/Select';
 import { useEffect, useState } from 'react';
 
 import CallNewGroupMS from './CallNewGroupMS';
-
+import Alert from 'react-bootstrap/Alert';
 
 
 export default function CreateGroupForm({userdata}){
@@ -109,6 +109,7 @@ export default function CreateGroupForm({userdata}){
     console.log(groupmembers)
     console.log(groupdata)
 
+
     return(
 
     
@@ -182,10 +183,14 @@ export default function CreateGroupForm({userdata}){
                 <Button variant="contained" onClick = {handleForm}>Create Group</Button>
                 {submitForm && <CallNewGroupMS groupdata ={ groupdata }/> }
             </Row>
-            
-        
+
         </Container>
-            
+
+        <br></br>
+            <br></br>
+            {submitForm && <Alert key= "success" variant= "success">Group successfully created!</Alert>}
+            {/* {submitForm && <Button variant="contained" href = {`/?${groupadmin}`}>Go back to My Groups!</Button>}
+             */}
     
     
     

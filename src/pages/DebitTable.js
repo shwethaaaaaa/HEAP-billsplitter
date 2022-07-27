@@ -30,7 +30,7 @@ export default function DebitTable({ debitdata }){
                            <tr>
                                 <td>{option.transaction_id}</td>
                                 <td>{option.group_id}</td>
-                                <td>{option.payer}</td>
+                                <td>{option.ower}</td>
                                 <td>+{option.amount}</td>
                             </tr>
                             ))}
