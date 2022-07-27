@@ -14,29 +14,32 @@ export default function CreditTable({ creditdata }){
          <>
                 <br></br>
                 <br></br>
+   
                 <h2>Your Credits</h2>
-                 <Table striped bordered hover variant="dark">
-                     <thead>
-                     <tr>
-                         <th>Transaction ID</th>
-                         <th>GroupID</th>
-                         <th>Recipient</th>
-                         <th>Amount</th>
-                     </tr>
-                     </thead>
-                     <tbody>
-                     {Transactions.map((option, idx) => (
-                            <tr key={ idx }>
-                                 <td>{option.transaction_id}</td>
-                                 <td>{option.group_id}</td>
-                                 <td>{option.payer}</td>
-                                 <td>-{option.amount}</td>
-                             </tr>
-                             ))}
-                     
-                     
-                     </tbody>
-                 </Table>
+                <div className='mx-3 mt-3'>
+                    <Table striped bordered hover responsive variant="dark" >
+                        <thead>
+                        <tr>
+                            <th>Transaction ID</th>
+                            <th>GroupID</th>
+                            <th>Recipient</th>
+                            <th>Amount</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {Transactions.map((option, idx) => (
+                                <tr key={ idx }>
+                                    <td>{option.transaction_id}</td>
+                                    <td>{option.group_id}</td>
+                                    <td>{option.payer}</td>
+                                    <td>- {option.amount}</td>
+                                </tr>
+                                ))}
+                        
+                        
+                        </tbody>
+                    </Table>
+                 </div>
          </>
      
     )
