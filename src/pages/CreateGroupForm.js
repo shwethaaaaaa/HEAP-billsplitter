@@ -5,7 +5,8 @@ import Row from 'react-bootstrap/Row';
 import useFetch from './useFetch';
 import MenuItem from '@mui/material/MenuItem';
 import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
+// import Button from '@mui/material/Button';
+import Button from 'react-bootstrap/Button';
 import { useTheme } from '@mui/material/styles';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
@@ -132,9 +133,9 @@ export default function CreateGroupForm({userdata}){
             
             
    
-            <Row >
-                <div>
-                    <FormControl sx={{ m: 1, width: 1250 }}>
+            <Row  >
+                <div >
+                    <FormControl sx={{  width: 320 }}>
                         <InputLabel id="demo-multiple-name-label">Group Members</InputLabel>
                         <Select
                         labelId="demo-multiple-name-label"
@@ -179,8 +180,8 @@ export default function CreateGroupForm({userdata}){
                 </TextField>
             </Row>
             <br/>
-            <Row className = 'mx-4'>
-                <Button variant="contained" onClick = {handleForm}>Create Group</Button>
+            <Row className = 'mx-4 mt-3' >
+                <Button variant='primary' onClick = {handleForm}>Create Group</Button>
                 {submitForm && <CallNewGroupMS groupdata ={ groupdata }/> }
             </Row>
 
