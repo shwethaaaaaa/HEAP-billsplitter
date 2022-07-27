@@ -41,7 +41,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Layout useriddata={userid}/>}>
                 <Route index element={<Home useriddata={userid}/>} />
-                <Route path="Profile" element={<Profile />} />
+               
                 <Route path="CreateGroup" element={<CreateGroup />} />
                 <Route path="CreateTransaction" element={<CreateTransaction />} />
                 <Route path="CreateTransactionForm" element={<CreateTransactionForm />} />

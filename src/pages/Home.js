@@ -16,7 +16,7 @@ import Alert from 'react-bootstrap/Alert';
 // export const UserIdContext = React.createContext("en")
 
 //need to use map function to create a card for each group
-export default function Home(){
+export default function Home({useriddata}){
 
     // const queryString = window.location.search.slice(1)
     // const querylist = queryString.split("?")
@@ -33,6 +33,7 @@ export default function Home(){
     // </script>
 
     // console.log("this is user_id: " + user_id)
+    console.log(useriddata)
 
     const Group_API_URL = 'http://localhost:5002/get_groups_by_user_id/1' 
     // + user_id
@@ -52,7 +53,7 @@ export default function Home(){
 
             <div id="api-display-card">
                 { error &&  <p>An error occurred while retrieving the data.</p> }
-                { isPending && <Alert key= "info" variant= "info">Please hold on while we getting your groups</Alert> }
+                { isPending && <Alert key= "info" variant= "info" className='mt-5 mx-3'>Please hold on while we getting your groups</Alert> }
                 { MyGroupsData && <MyGroupCards mygroupsdata={ MyGroupsData} /> }
             </div>
 
