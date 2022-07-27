@@ -1,12 +1,12 @@
 # HEAP-SplitSmart
 </br>
-HEAP Project Group 15
+HEAP Project Group 15 : Sanofer, Shwetha, Kowsalya, Josita
 </br>
 </br>
 
 <b>Motivation for this project:</b>
 </br>
-We aim to create an application which helps to simplify the process of bill-splitting when travelling as a group. In the past, splitting the cost of bills and expenses was a clumsy process. You had to calculate who owes what, then go through the tedious task of collecting money from each person. Bill-splitting apps let you divide up the cost of things like group dinners and group trips so that everyone can pay their fair share, making it much easier for everyone to cover their share of the expense right away. SplitSmart! lets you track lending and borrowing over time. Use the app to create travel groups and track what each person in the group owes. Additionally, if you’re traveling internationally, SplitSmart! accommodates the local exchange rate to your transactions. SplitSmart uses a Greedy Algorithm to calculate final settlements by minimising the cash flow.
+We aim to create an application which helps to simplify the process of bill-splitting when travelling as a group. In the past, splitting the cost of bills and expenses was a clumsy process. You had to calculate who owes what, then go through the tedious task of collecting money from each person. Bill-splitting apps let you divide up the cost of things like group dinners and group trips so that everyone can pay their fair share, making it much easier for everyone to cover their share of the expense right away in the minimum number of transactions possible. SplitSmart! lets you track lending and borrowing over time. Use the app to create travel groups and track what each person in the group owes. Additionally, if you’re traveling internationally, SplitSmart! accommodates the local exchange rate to your transactions. SplitSmart uses a Greedy Algorithm to calculate final settlements by minimising the cash flow.
  
 <b>Use case Scenarios</b>:
  
