@@ -19,6 +19,7 @@ import CountryImage from './CountryImage';
 import GroupTransactionsTable from './TransactionsbyGroup';
 import { Outlet, Link } from "react-router-dom";
 import { data } from 'autoprefixer';
+import Card from 'react-bootstrap/Card';
 
 
 
@@ -103,12 +104,18 @@ export default function TransactionTable() {
                 { unsplashdata && <CountryImage unsplashdata={unsplashdata} /> }
           </div>
 
-          <Container className='mt-5 mb-3'>
-            <h2>{groupName}</h2>
-            <h3>{duration}</h3>
-            <br/>
-            <strong >Transaction History</strong>
-          </Container>
+          
+   
+                <Card className='mt-3 mr-1 mb-2' border="dark" style={{ width: '24.5rem'}}>
+                    <Card.Body>
+                        <h3>{groupName}</h3>
+                        <h3>{duration}</h3>
+                    </Card.Body>
+                </Card>
+                <br/>
+                <h4>Transaction History</h4>
+         
+         
 
           <div id="api-display-card">
                 { error4 &&  <p>An error occurred while retrieving the transactions data. </p> }

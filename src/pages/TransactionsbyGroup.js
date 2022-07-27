@@ -13,8 +13,6 @@ export default function GroupTransactionsTable({ grouptransactiondata }){
     return(
          <>
                 <br></br>
-                <br></br>
-                
                  <Table striped bordered hover variant="dark">
                      <thead>
                      <tr>
