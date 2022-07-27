@@ -60,46 +60,47 @@ import Alert from 'react-bootstrap/Alert';
     const group_id = transactiondata['group_id']
   
     return (
-      <Box
-        component="form"
-        sx={{
-          '& .MuiTextField-root': { m: 1, width: '25ch' },
-        }}
-        noValidate
-        autoComplete="off"
-      >
-        <div style= {{ margin:'auto'}}>
-            <Container fluid="sm" className='mt-3'>
-                <Row classname = 'mx-4'>
+    //   <Box
+    //     component="form"
+    //     sx={{
+    //       '& .MuiTextField-root': { m: 1, width: '5' },
+    //     }}
+    //     noValidate
+    //     autoComplete="off"
+    //   >
+        <div >
+            <Container fluid="sm" className='mt-5'>
+                <Row className = 'mx-4'>
                     <TextField id="outlined-basic" label="Paid By" variant="outlined" value={paidby} onChange={handleChange1}/>
                 </Row>
                 <br/>
-                <Row classname = 'mx-4'>
+                <Row className = 'mx-4'>
                     <TextField id="outlined-basic" label="Paid On Behalf Of" variant="outlined" value={paidfor} onChange={handleChange2}/>
                 </Row>
                 <br/>
-                <Row classname = 'mx-4'>
+                <Row className = 'mx-4'>
                     <TextField id="outlined-basic" label="Amount" variant="outlined" value={amount} onChange={handleChange3}/>
                 </Row>
                 <br/>
-                <Row classname = 'mx-4'>
+                <Row className = 'mx-4'>
                     <TextField id="outlined-basic" label="Comments" variant="outlined" value={comments} onChange={handleChange4}/>
                 </Row>
                 <br/>
-                <Row classname = 'mx-4'>
+                <Row className = 'mx-4'>
                     <TextField id="outlined-basic" label="Exchange Rate" variant="outlined" value={exchangerate} onChange={handleChange5}/>
                 </Row>
                
+            
+                <Row className = 'mx-4 mt-5'>
+                    <Button size="lg" variant="primary" onClick = {handlesubmit}>Add Transaction</Button>
+                </Row>
+                {submitForm && <CreateTransactionIntermediate transactiondata ={ transactiondata }/> }
+                {submitForm && <Alert key= "success" variant= "success">Transaction successfully added!</Alert>}
             </Container>
- 
-            <Button classname="mt-5 mb-3" variant="primary" onClick = {handlesubmit}>Add Transaction&nbsp;&nbsp;</Button>
- 
-            {submitForm && <CreateTransactionIntermediate transactiondata ={ transactiondata }/> }
-            {submitForm && <Alert key= "success" variant= "success">Transaction successfully added!</Alert>}
-
         </div>
+     
 
-      </Box>
+    //   </Box>
     );
   }
 

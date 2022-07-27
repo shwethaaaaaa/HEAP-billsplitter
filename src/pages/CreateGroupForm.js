@@ -181,7 +181,7 @@ export default function CreateGroupForm({userdata}){
             </Row>
             <br/>
             <Row className = 'mx-4 mt-3' >
-                <Button variant='primary' onClick = {handleForm}>Create Group</Button>
+                <Button variant='primary'size="lg" onClick = {handleForm}>Create Group</Button>
                 {submitForm && <CallNewGroupMS groupdata ={ groupdata }/> }
             </Row>
 
