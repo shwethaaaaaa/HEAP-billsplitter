@@ -30,6 +30,12 @@ Pre-installation:
 - pip install -U Flask-SQLAlchemy
 - npm install axios 
 - Install Flaskcors
+
+Please follow these instructions in order to recieve the Twilio Message:
+
+1. Create a Twilio account and click on SMS API 
+2. Change the mobile numbers in the Users SQL to your mobile number , which has to be registered in Twilio
+3. Change the Authentication Token and Account SID ,in calculatebill.py file, to the token and SID you see in the twilio account 
  
 Run all the microservices:
  
