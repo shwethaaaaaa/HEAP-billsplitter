@@ -95,7 +95,7 @@ import Alert from 'react-bootstrap/Alert';
                     <Button size="lg" variant="primary" onClick = {handlesubmit}>Add Transaction</Button>
                 </Row>
                 {submitForm && <CreateTransactionIntermediate transactiondata ={ transactiondata }/> }
-                {submitForm && <Alert key= "success" variant= "success">Transaction successfully added!</Alert>}
+                {submitForm && <Alert key= "success" variant= "success" className = "mt-3">Transaction successfully added!</Alert>}
             </Container>
         </div>
      

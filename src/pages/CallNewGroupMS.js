@@ -2,7 +2,7 @@ import useFetch from "./useFetch"
 
 export default function CallNewGroupMS(groupdata) {
     
-    const Group_API_URL = 'http://192.168.68.103:5002/group';
+    const Group_API_URL = 'http://localhost:5002/group';
     console.log(groupdata.groupdata)
     const post_input = { "group_name":groupdata.groupdata.group_name , "group_members": groupdata.groupdata.group_members,"owner_id":groupdata.groupdata.owner_id, "user_ids": groupdata.groupdata.user_ids, "home_currency": groupdata.groupdata.home_currency, "trip_duration":groupdata.groupdata.trip_duration}
     console.log(post_input)

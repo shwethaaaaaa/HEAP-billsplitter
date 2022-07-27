@@ -23,7 +23,7 @@ from twilio.rest import Client
 
 account_sid = 'ACda2adf16d90077077fbdf70fc8bf766e'
 
-auth_token = 'efec227ffff8078c529508b7bd666340'
+auth_token = '7a1814ce295fac352a900b575e3180eb'
 
 # account_sid = os.environ[TWILIO_ACCOUNT_SID] 
 # auth_token = os.environ[TWILIO_AUTH_TOKEN] 

@@ -14,8 +14,8 @@ export default function GroupFinalTransaction(){
     const queryString1 = window.location.search.slice(1)
     const querylist = queryString1.split("?")
     const group_ID = querylist[0]
-    const CalculateBill_API_URL = 'http://192.168.68.103:5004/calculate_bill/' + group_ID
-    // const CalculateBill_API_URL = 'http://localhost:5004/calculate_bill/' + group_ID
+    // const CalculateBill_API_URL = 'http://192.168.68.103:5004/calculate_bill/' + group_ID
+    const CalculateBill_API_URL = 'http://localhost:5004/calculate_bill/' + group_ID
 
     const {
         data: FinalTransactionsData, 

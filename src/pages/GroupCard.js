@@ -23,10 +23,10 @@ export default function MyGroupCards({mygroupsdata}){
             axios.get(Unsplash_API_URL)
               .then(res => {
                 
-                console.log(res.data.results[0].urls.small)
+                // console.log(res.data.results[0].urls.small)
                 const small_image_url = res.data.results[0].urls.small;
                 group['image_url'] = small_image_url
-                console.log(group)
+                // console.log(group)
                 
               })
             
@@ -45,6 +45,7 @@ export default function MyGroupCards({mygroupsdata}){
                         <Col className="mb-3" >
                             <Card style={{ width: '18rem' }} className='my-auto'>
                                         <Card.Img variant="top" src= {option.image_url}/>
+
                                         <Card.Body>
                                             <Card.Title>{option.group_name}</Card.Title>
                                             <Card.Text><Badge pill bg="warning" text="dark">Trip Duration: <b>{option.trip_duration}</b></Badge></Card.Text>

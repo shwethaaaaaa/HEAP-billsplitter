@@ -23,7 +23,7 @@ import Alert from 'react-bootstrap/Alert';
 export default function AddingNewGroup(){
         
             const allUsers = ['Mary', 'poppy']  // need to call user MS
-            const User_API_URL = 'http://192.168.68.103:5007/get_all_users';
+            const User_API_URL = 'http://localhost:5007/get_all_users';
             const {
                 data  :userdata, 
                 isPending, 
@@ -63,7 +63,7 @@ export default function AddingNewGroup(){
             <div >
                
                 { error && <p>There is some error in fetching users</p> }
-                { isPending && <Alert key= "info" variant= "info">Please wait</Alert> }
+                { isPending && <Alert key= "info" variant= "info" className = "mt-5 mb-3">Please wait</Alert> }
                 { userdata && <CreateGroupForm userdata={ userdata } /> }
             </div>
 

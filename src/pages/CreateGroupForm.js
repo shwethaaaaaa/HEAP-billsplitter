@@ -135,7 +135,7 @@ export default function CreateGroupForm({userdata}){
    
             <Row  >
                 <div >
-                    <FormControl sx={{  width: 320 }}>
+                    <FormControl sx={{  width: 340 }}>
                         <InputLabel id="demo-multiple-name-label">Group Members</InputLabel>
                         <Select
                         labelId="demo-multiple-name-label"

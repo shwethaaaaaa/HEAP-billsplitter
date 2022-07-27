@@ -5,14 +5,16 @@ import { ContentCutOutlined } from "@mui/icons-material";
 
 export default function CreateTransactionIntermediate(transactiondata) {
 
+    // console.log(transactiondata)
+
     const payerid = transactiondata.transactiondata.payer_id
     const owerid = transactiondata.transactiondata.ower_id
 
     console.log(payerid)
     console.log(owerid)
 
-    const Payer_API_URL = 'http://192.168.18.28:5007/get_user_by_user_id/' + String(payerid);
-    const Ower_API_URL = 'http://192.168.18.28:5007/get_user_by_user_id/' + String(owerid);
+    const Payer_API_URL = 'http://localhost:5007/get_user_by_user_id/' + String(payerid);
+    const Ower_API_URL = 'http://localhost:5007/get_user_by_user_id/' + String(owerid);
 
     console.log(Payer_API_URL)
 
