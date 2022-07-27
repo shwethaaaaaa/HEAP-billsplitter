@@ -12,10 +12,11 @@ export default function MyGroupCards({mygroupsdata}){
     console.log(MyGroups)
     return(
          <>
-            <Container className='mt-5'>
-                {MyGroups.map((option, idx) => (
-                    <Row key={ idx }>
-                        <Col>
+             <Container className='mt-5'>
+                {MyGroups.map((option) => (
+                   
+                    <Row className="ms-4" >
+                        <Col className="mb-3" >
                             <Card style={{ width: '18rem' }} className='my-auto'>
                                         <Card.Img variant="top" src={require('./friendss.jpg')}/>
                                         <Card.Body>
@@ -27,11 +28,16 @@ export default function MyGroupCards({mygroupsdata}){
                             </Card>
                         </Col>
                     </Row>
+                   
+                   
                 ))}
-                <Row>
+                <Row className="mt-3">
                 <Button href = "./CreateGroup"  variant="dark">Create New Group</Button>
                 </Row>
+ 
             </Container>
+
+
   
 
          </>
