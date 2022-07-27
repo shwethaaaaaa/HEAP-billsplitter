@@ -55,8 +55,8 @@ export default function MyGroupCards({mygroupsdata}){
                    
                    
                 ))}
-                <Row className="mt-3">
-                <Button href = "./CreateGroup"  variant="dark">Create New Group</Button>
+                <Row className="mt-3 mb-4 gap-2 mx-3">
+                <Button href = "./CreateGroup"  variant="primary" size="lg">Create New Group</Button>
                 </Row>
  
             </Container>
